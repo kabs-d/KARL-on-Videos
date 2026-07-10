@@ -34,7 +34,7 @@ The original-frame Qwen run is the baseline. For each epsilon, sampled frames ar
 
 ## Global Tradeoff
 
-| condition | rows | Qwen accuracy | delta | mean active KARL tokens | reconstruction L1 |
+| condition | rows | Qwen accuracy | accuracy delta | mean active KARL tokens | reconstruction L1 |
 |---|---:|---:|---:|---:|---:|
 | original frames | 664 | 0.6280 | 0.0000 | 256.00 | 0.00000 |
 | KARL eps=0.03 | 664 | 0.5858 | -0.0422 | 248.40 | 0.04296 |

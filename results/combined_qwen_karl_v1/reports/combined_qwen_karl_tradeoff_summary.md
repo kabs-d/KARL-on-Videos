@@ -19,7 +19,7 @@ Task families were assigned from Perception Test tags using the curation script,
 
 ## Global Tradeoff
 
-| condition | rows | accuracy | delta | active mean | L1 mean | fixed | lost |
+| condition | rows | accuracy | accuracy delta | active mean | L1 mean | fixed | lost |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | original | 664 | 0.6280 | 0.0000 | 256.00 | 0.00000 | 0 | 0 |
 | eps_003 | 664 | 0.5858 | -0.0422 | 248.40 | 0.04296 | 38 | 66 |

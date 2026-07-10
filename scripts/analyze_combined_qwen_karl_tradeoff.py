@@ -311,7 +311,7 @@ def build_markdown(summary: dict[str, Any]) -> str:
         )
     lines.extend(
         markdown_table(
-            ["condition", "rows", "accuracy", "delta", "active mean", "L1 mean", "fixed", "lost"],
+            ["condition", "rows", "accuracy", "accuracy delta", "active mean", "L1 mean", "fixed", "lost"],
             global_rows,
         )
     )
