@@ -114,13 +114,92 @@ The original frame is again kept in the first column for direct side-by-side com
 
 The next table tracks selected latent indices across the eight sampled frames of `video_76`. I do **not** claim object tracking here. The safer observation is that some latent indices remain spatially concentrated across frames instead of diffusing broadly. In several cases, the concentrated region stays in a similar part of the frame.
 
-| latent index | visual note | f0 | f1 | f2 | f3 | f4 | f5 | f6 | f7 |
-|---:|---|---|---|---|---|---|---|---|---|
-| 36 | left-cup spatial area | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_000.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_001.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_002.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_003.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_004.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_005.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_006.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_007.png" width="96"> |
-| 39 | cup-like spatial area | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_000.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_001.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_002.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_003.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_004.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_005.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_006.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_007.png" width="96"> |
-| 42 | cup-like spatial area | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_000.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_001.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_002.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_003.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_004.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_005.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_006.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_007.png" width="96"> |
-| 43 | shirt/t-shirt spatial area | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_000.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_001.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_002.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_003.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_004.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_005.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_006.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_007.png" width="96"> |
-| 159 | cup-like spatial area when active | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_000.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_001.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_002.png" width="96"> | inactive | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_004.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_005.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_006.png" width="96"> | <img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_007.png" width="96"> |
+<table>
+  <tr>
+    <th>latent index</th>
+    <th>visual note</th>
+    <th>f0</th>
+    <th>f1</th>
+    <th>f2</th>
+    <th>f3</th>
+    <th>f4</th>
+    <th>f5</th>
+    <th>f6</th>
+    <th>f7</th>
+  </tr>
+  <tr>
+    <td>source</td>
+    <td>original color frame</td>
+    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_000.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_001.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_002.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_003.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_004.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_005.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_006.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_007.png" width="128"></td>
+  </tr>
+  <tr>
+    <td>36</td>
+    <td>left-cup spatial area</td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_000.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_001.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_002.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_003.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_004.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_005.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_006.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_007.png" width="128"></td>
+  </tr>
+  <tr>
+    <td>39</td>
+    <td>cup-like spatial area</td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_000.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_001.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_002.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_003.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_004.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_005.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_006.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_007.png" width="128"></td>
+  </tr>
+  <tr>
+    <td>42</td>
+    <td>cup-like spatial area</td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_000.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_001.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_002.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_003.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_004.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_005.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_006.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_007.png" width="128"></td>
+  </tr>
+  <tr>
+    <td>43</td>
+    <td>shirt/t-shirt spatial area</td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_000.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_001.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_002.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_003.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_004.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_005.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_006.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_007.png" width="128"></td>
+  </tr>
+  <tr>
+    <td>159</td>
+    <td>cup-like spatial area when active</td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_000.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_001.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_002.png" width="128"></td>
+    <td>inactive</td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_004.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_005.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_006.png" width="128"></td>
+    <td><img src="../results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_007.png" width="128"></td>
+  </tr>
+</table>
 
 ## Takeaways
 
