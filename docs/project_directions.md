@@ -6,19 +6,24 @@ This project is structured as four complementary probes of KARL on short videos.
 
 Question:
 
-> Do individual KARL latent indices attend to semantically coherent regions, and can a latent index persist across frames as an object moves?
+> Do individual KARL latent indices attend to semantically coherent regions, and can the same latent index remain spatially concentrated across sampled frames?
 
-Intended artifacts:
+Status:
 
 ```text
-single-token read-attention visualizations
-frame-by-frame latent-index tracking examples
-representative object-like attention cases
+packaged in this repository
+```
+
+Packaged artifacts:
+
+```text
+docs/experiment_1_object_read_attention.md
+results/direction1_object_read_attention_v1/
 ```
 
 Interpretation target:
 
-These examples do not prove object semantics in a causal sense, but they provide visual evidence that some active latent indices behave like persistent object/region trackers over short clips.
+These examples do not prove object semantics in a causal sense. They provide visual evidence that selected active latent indices can produce compact, object-like read maps and can remain spatially concentrated across sampled video frames.
 
 ## 2. KARL Reconstructions And Downstream VLM Behavior
 

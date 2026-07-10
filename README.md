@@ -12,10 +12,22 @@ The repository is organized as four linked analysis notes. I am packaging them o
 
 | direction | status | note |
 |---|---|---|
-| 1. Object-like and temporally persistent read attention | next | README coming next |
+| 1. Object-like and temporally persistent read attention | packaged | [analysis README](docs/experiment_1_object_read_attention.md) |
 | 2. KARL reconstructions and downstream VLM behavior | packaged | [analysis README](docs/experiment_2_qwen_karl_tradeoff.md) |
 | 3. Higher compression keeps more distinct tokens | next | README coming next |
 | 4. Epsilon vs token utilization over video frames | next | README coming next |
+
+## Direction 1 Snapshot
+
+The first packaged direction visualizes KARL read-attention maps for selected active latent indices at `eps=0.07`:
+
+```text
+encoder latent token query -> original 16x16 input grid key
+```
+
+The note focuses on manually inspected cup-moving clips. It shows that several selected latent indices have compact, object-like read maps on the first frame, and that some indices remain spatially concentrated across the eight sampled frames of `video_76`. This is a qualitative tokenizer-interpretability probe, not an object-tracking claim and not a segmentation benchmark.
+
+See the detailed note: [Direction 1: Object-Like And Temporally Persistent Read Attention](docs/experiment_1_object_read_attention.md).
 
 ## Direction 2 Snapshot
 
@@ -60,8 +72,10 @@ See [docs/dataset_construction.md](docs/dataset_construction.md) for the exact c
 
 This repository includes compact scripts, aggregate reports, tables, and figures. It intentionally excludes large data artifacts.
 
-Included for Direction 2:
+Included packaged artifacts:
 
+- [Direction 1 detailed README](docs/experiment_1_object_read_attention.md)
+- [Selected Direction 1 read-attention manifest](results/direction1_object_read_attention_v1/tables/selected_read_attention_assets.csv)
 - [Direction 2 detailed README](docs/experiment_2_qwen_karl_tradeoff.md)
 - [Major-tag accuracy table](results/combined_qwen_karl_v1/tables/combined_major_tag_accuracy.csv)
 
@@ -69,7 +83,7 @@ The main Direction 2 README embeds the accuracy/token plot and tag heatmap direc
 
 Excluded:
 
-- Perception Test videos
+- raw Perception Test videos
 - raw official annotation JSONs
 - model checkpoints
 - KARL reconstructions
@@ -83,6 +97,7 @@ Scripts are under [scripts/](scripts):
 ```text
 build_mcq_manifest.py
 curate_task_data.py
+render_direction1_read_attention_assets.py
 run_qwen_perception_calibration.py
 run_karl_reconstruction_mdl.py
 run_qwen_on_karl_reconstructions.py

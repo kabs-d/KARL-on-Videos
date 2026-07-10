@@ -1,0 +1,57 @@
+section,epsilon,video_id,frame_position,frame_index,latent_index,active_rank,active,halt_probability,description,png_path
+first_frame,eps_007,video_76,0,0,36,36,True,0.00008362,compact attention on a cup on the table,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_76/latent_036.png
+first_frame,eps_007,video_76,0,0,38,38,True,0.00008284,compact attention on a cup on the table,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_76/latent_038.png
+first_frame,eps_007,video_76,0,0,39,39,True,0.00007876,compact attention on a cup on the table,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_76/latent_039.png
+first_frame,eps_007,video_76,0,0,42,42,True,0.00008085,compact attention on a cup on the table,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_76/latent_042.png
+first_frame,eps_007,video_76,0,0,159,159,True,0.70016152,compact attention on a cup on the table,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_76/latent_159.png
+first_frame,eps_007,video_76,0,0,132,132,True,0.66160744,attention concentrated near the hand,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_76/latent_132.png
+first_frame,eps_007,video_76,0,0,158,158,True,0.68131453,attention spread over the three-cup group,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_76/latent_158.png
+first_frame,eps_007,video_1614,0,0,0,0,True,0.00007988,cup,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_1614/latent_000.png
+first_frame,eps_007,video_1614,0,0,3,3,True,0.00008499,table leg,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_1614/latent_003.png
+first_frame,eps_007,video_1614,0,0,4,4,True,0.00008999,cup,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_1614/latent_004.png
+first_frame,eps_007,video_1614,0,0,17,17,True,0.00008751,cup,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_1614/latent_017.png
+first_frame,eps_007,video_1614,0,0,20,20,True,0.00008758,cup,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_1614/latent_020.png
+first_frame,eps_007,video_1614,0,0,25,25,True,0.00007819,table edge,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_1614/latent_025.png
+first_frame,eps_007,video_1614,0,0,35,35,True,0.00008743,cup,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_1614/latent_035.png
+first_frame,eps_007,video_1614,0,0,53,53,True,0.00010110,cup,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_1614/latent_053.png
+first_frame,eps_007,video_1614,0,0,103,103,True,0.31266898,cup,results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_1614/latent_103.png
+temporal,eps_007,video_76,0,0,36,36,True,0.00008362,concentrated near the left-cup spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_000.png
+temporal,eps_007,video_76,0,0,39,39,True,0.00007876,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_000.png
+temporal,eps_007,video_76,0,0,42,42,True,0.00008085,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_000.png
+temporal,eps_007,video_76,0,0,43,43,True,0.00007665,concentrated near the shirt/t-shirt spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_000.png
+temporal,eps_007,video_76,0,0,159,159,True,0.70016152,concentrated near a cup-like spatial region when active,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_000.png
+temporal,eps_007,video_76,1,88,36,36,True,0.00008853,concentrated near the left-cup spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_001.png
+temporal,eps_007,video_76,1,88,39,39,True,0.00008192,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_001.png
+temporal,eps_007,video_76,1,88,42,42,True,0.00008393,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_001.png
+temporal,eps_007,video_76,1,88,43,43,True,0.00008734,concentrated near the shirt/t-shirt spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_001.png
+temporal,eps_007,video_76,1,88,159,159,True,0.65176469,concentrated near a cup-like spatial region when active,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_001.png
+temporal,eps_007,video_76,2,176,36,36,True,0.00008467,concentrated near the left-cup spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_002.png
+temporal,eps_007,video_76,2,176,39,39,True,0.00008350,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_002.png
+temporal,eps_007,video_76,2,176,42,42,True,0.00008136,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_002.png
+temporal,eps_007,video_76,2,176,43,43,True,0.00008043,concentrated near the shirt/t-shirt spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_002.png
+temporal,eps_007,video_76,2,176,159,159,True,0.51950699,concentrated near a cup-like spatial region when active,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_002.png
+temporal,eps_007,video_76,3,264,36,36,True,0.00008913,concentrated near the left-cup spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_003.png
+temporal,eps_007,video_76,3,264,39,39,True,0.00007969,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_003.png
+temporal,eps_007,video_76,3,264,42,42,True,0.00007913,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_003.png
+temporal,eps_007,video_76,3,264,43,43,True,0.00009908,concentrated near the shirt/t-shirt spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_003.png
+temporal,eps_007,video_76,3,264,159,,False,,concentrated near a cup-like spatial region when active,
+temporal,eps_007,video_76,4,351,36,36,True,0.00007890,concentrated near the left-cup spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_004.png
+temporal,eps_007,video_76,4,351,39,39,True,0.00007695,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_004.png
+temporal,eps_007,video_76,4,351,42,42,True,0.00007989,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_004.png
+temporal,eps_007,video_76,4,351,43,43,True,0.00008055,concentrated near the shirt/t-shirt spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_004.png
+temporal,eps_007,video_76,4,351,159,159,True,0.44362932,concentrated near a cup-like spatial region when active,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_004.png
+temporal,eps_007,video_76,5,439,36,36,True,0.00007903,concentrated near the left-cup spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_005.png
+temporal,eps_007,video_76,5,439,39,39,True,0.00007706,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_005.png
+temporal,eps_007,video_76,5,439,42,42,True,0.00007601,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_005.png
+temporal,eps_007,video_76,5,439,43,43,True,0.00008098,concentrated near the shirt/t-shirt spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_005.png
+temporal,eps_007,video_76,5,439,159,159,True,0.59373772,concentrated near a cup-like spatial region when active,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_005.png
+temporal,eps_007,video_76,6,527,36,36,True,0.00008668,concentrated near the left-cup spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_006.png
+temporal,eps_007,video_76,6,527,39,39,True,0.00008039,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_006.png
+temporal,eps_007,video_76,6,527,42,42,True,0.00008741,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_006.png
+temporal,eps_007,video_76,6,527,43,43,True,0.00008439,concentrated near the shirt/t-shirt spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_006.png
+temporal,eps_007,video_76,6,527,159,159,True,0.56155622,concentrated near a cup-like spatial region when active,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_006.png
+temporal,eps_007,video_76,7,615,36,36,True,0.00007987,concentrated near the left-cup spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_036/frame_007.png
+temporal,eps_007,video_76,7,615,39,39,True,0.00008298,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_039/frame_007.png
+temporal,eps_007,video_76,7,615,42,42,True,0.00008171,concentrated near a cup-like spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_042/frame_007.png
+temporal,eps_007,video_76,7,615,43,43,True,0.00008072,concentrated near the shirt/t-shirt spatial region,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_043/frame_007.png
+temporal,eps_007,video_76,7,615,159,159,True,0.61317575,concentrated near a cup-like spatial region when active,results/direction1_object_read_attention_v1/attention_heatmaps/temporal/video_76/latent_159/frame_007.png
