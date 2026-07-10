@@ -2,7 +2,7 @@
 
 ## Research Question
 
-If original video frames are replaced by KARL reconstructions, which Perception Test question types remain answerable by Qwen and which degrade as KARL uses fewer active tokens?
+If original video frames are replaced by KARL reconstructions, which Perception Test question types remain answerable by Qwen2.5-VL-7B-Instruct and which degrade as KARL uses fewer active tokens?
 
 This direction uses Qwen only as a downstream probe. The main object of study is still KARL: how much task-relevant visual information survives at different reconstruction-quality thresholds.
 
