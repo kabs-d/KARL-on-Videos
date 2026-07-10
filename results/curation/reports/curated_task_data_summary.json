@@ -1,0 +1,171 @@
+{
+  "calibration_main_overlap_rows": 0,
+  "curated_rows": 6507,
+  "curated_unique_videos": 1934,
+  "enriched_rows": 7392,
+  "excluded_other_rows": 885,
+  "input_rows": 7392,
+  "membership_counts": {
+    "object_counting": 1278,
+    "occlusion_permanence": 637,
+    "recognition_control": 2179,
+    "spatial_relations": 1926,
+    "temporal_event": 3151
+  },
+  "primary_family_counts": {
+    "object_counting": 1132,
+    "occlusion_permanence": 637,
+    "recognition_control": 1254,
+    "spatial_relations": 1584,
+    "temporal_event": 1900
+  },
+  "same_video_candidate_rows": 5825,
+  "same_video_candidate_videos": 1419,
+  "skipped_bad_options": 0,
+  "skipped_missing_video": 0,
+  "source_train_rows": 7392,
+  "subsets": {
+    "calibration_balanced_150_seed17": {
+      "area": {
+        "abstraction": 47,
+        "memory": 5,
+        "physics": 45,
+        "semantics": 53
+      },
+      "primary_task_family": {
+        "object_counting": 30,
+        "occlusion_permanence": 30,
+        "recognition_control": 30,
+        "spatial_relations": 30,
+        "temporal_event": 30
+      },
+      "reasoning": {
+        "counterfactual": 7,
+        "descriptive": 120,
+        "explanatory": 15,
+        "predictive": 8
+      },
+      "rows": 150,
+      "unique_videos": 138
+    },
+    "main_balanced_300_seed17": {
+      "area": {
+        "abstraction": 90,
+        "memory": 7,
+        "physics": 107,
+        "semantics": 96
+      },
+      "primary_task_family": {
+        "object_counting": 60,
+        "occlusion_permanence": 60,
+        "recognition_control": 60,
+        "spatial_relations": 60,
+        "temporal_event": 60
+      },
+      "reasoning": {
+        "counterfactual": 10,
+        "descriptive": 235,
+        "explanatory": 38,
+        "predictive": 17
+      },
+      "rows": 300,
+      "unique_videos": 285
+    },
+    "same_video_controls_seed17": {
+      "area": {
+        "abstraction": 66,
+        "memory": 6,
+        "physics": 196,
+        "semantics": 117
+      },
+      "primary_task_family": {
+        "object_counting": 40,
+        "occlusion_permanence": 75,
+        "recognition_control": 62,
+        "spatial_relations": 128,
+        "temporal_event": 80
+      },
+      "reasoning": {
+        "counterfactual": 11,
+        "descriptive": 332,
+        "explanatory": 20,
+        "predictive": 22
+      },
+      "rows": 385,
+      "unique_videos": 60
+    },
+    "task_critical_ablation_bank_seed17": {
+      "area": {
+        "abstraction": 16,
+        "physics": 10,
+        "semantics": 14
+      },
+      "primary_task_family": {
+        "object_counting": 10,
+        "occlusion_permanence": 10,
+        "recognition_control": 10,
+        "spatial_relations": 10
+      },
+      "reasoning": {
+        "counterfactual": 2,
+        "descriptive": 31,
+        "explanatory": 3,
+        "predictive": 4
+      },
+      "rows": 40,
+      "unique_videos": 40
+    },
+    "temporal_signature_bank_seed17": {
+      "area": {
+        "abstraction": 7,
+        "memory": 2,
+        "physics": 30,
+        "semantics": 21
+      },
+      "primary_task_family": {
+        "occlusion_permanence": 20,
+        "recognition_control": 20,
+        "temporal_event": 20
+      },
+      "reasoning": {
+        "descriptive": 47,
+        "explanatory": 9,
+        "predictive": 4
+      },
+      "rows": 60,
+      "unique_videos": 60
+    },
+    "token_responsibility_bank_seed17": {
+      "area": {
+        "abstraction": 14,
+        "memory": 3,
+        "physics": 9,
+        "semantics": 14
+      },
+      "primary_task_family": {
+        "object_counting": 8,
+        "occlusion_permanence": 8,
+        "recognition_control": 8,
+        "spatial_relations": 8,
+        "temporal_event": 8
+      },
+      "reasoning": {
+        "descriptive": 32,
+        "explanatory": 5,
+        "predictive": 3
+      },
+      "rows": 40,
+      "unique_videos": 39
+    }
+  },
+  "task_critical_ablation_candidate_rows": 4416,
+  "temporal_candidate_rows": 3393,
+  "token_responsibility_candidate_rows": 6507,
+  "video_counts_by_primary_family": {
+    "object_counting": 729,
+    "occlusion_permanence": 433,
+    "recognition_control": 988,
+    "spatial_relations": 885,
+    "temporal_event": 1230
+  }
+}

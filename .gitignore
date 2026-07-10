@@ -1,0 +1,26 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# Local data and models
+data/
+raw_zips/
+videos/
+checkpoints/
+pretrained_models/
+*.ckpt
+*.pth
+*.safetensors
+
+# Large generated artifacts
+reconstructions/
+attention_maps/
+attention_overlays/
+*.npz
+*.mp4
+*.zip
+*.log
+
+# Full raw predictions are intentionally not part of the public artifact.
+predictions/
+qwen_*_predictions/

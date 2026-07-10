@@ -1,0 +1,53 @@
+{
+  "epsilon_tags": [
+    "eps_003",
+    "eps_005",
+    "eps_007"
+  ],
+  "family_count_distribution": {
+    "4": 45,
+    "5": 15
+  },
+  "per_epsilon": {
+    "eps_003": {
+      "mean_accuracy_delta_per_video": -0.046433982683982696,
+      "mean_karl_accuracy_per_video": 0.6059451659451658,
+      "mean_original_accuracy_per_video": 0.6523791486291486,
+      "videos": 60,
+      "videos_any_changed": 37,
+      "videos_mixed_fixed_and_lost": 8,
+      "videos_with_fixed_question": 15,
+      "videos_with_lost_question": 30
+    },
+    "eps_005": {
+      "mean_accuracy_delta_per_video": -0.061771284271284276,
+      "mean_karl_accuracy_per_video": 0.5906078643578642,
+      "mean_original_accuracy_per_video": 0.6523791486291486,
+      "videos": 60,
+      "videos_any_changed": 41,
+      "videos_mixed_fixed_and_lost": 11,
+      "videos_with_fixed_question": 18,
+      "videos_with_lost_question": 34
+    },
+    "eps_007": {
+      "mean_accuracy_delta_per_video": -0.07933261183261184,
+      "mean_karl_accuracy_per_video": 0.5730465367965369,
+      "mean_original_accuracy_per_video": 0.6523791486291486,
+      "videos": 60,
+      "videos_any_changed": 50,
+      "videos_mixed_fixed_and_lost": 20,
+      "videos_with_fixed_question": 26,
+      "videos_with_lost_question": 44
+    }
+  },
+  "question_count_distribution": {
+    "5": 7,
+    "6": 29,
+    "7": 21,
+    "8": 1,
+    "10": 1,
+    "11": 1
+  },
+  "question_rows": 385,
+  "unique_videos": 60
+}
