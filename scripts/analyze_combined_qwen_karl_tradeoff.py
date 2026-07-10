@@ -51,11 +51,6 @@ def write_json(path: Path, data: dict[str, Any]) -> None:
     path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def write_text(path: Path, text: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text, encoding="utf-8")
-
-
 def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
@@ -256,135 +251,6 @@ def build_summaries(question_rows: list[dict[str, Any]], construction: dict[str,
     }
 
 
-def fmt(value: Any, digits: int = 4) -> str:
-    if isinstance(value, float):
-        return f"{value:.{digits}f}"
-    return str(value)
-
-
-def markdown_table(headers: list[str], rows: list[list[Any]]) -> list[str]:
-    lines = ["| " + " | ".join(headers) + " |", "| " + " | ".join("---" for _ in headers) + " |"]
-    for row in rows:
-        lines.append("| " + " | ".join(str(cell) for cell in row) + " |")
-    return lines
-
-
-def build_markdown(summary: dict[str, Any]) -> str:
-    construction = summary["dataset_construction"]
-    lines = [
-        "# Combined Qwen/KARL Reconstruction Tradeoff",
-        "",
-        "This is the primary overall analysis for the Qwen side of the KARL extension.",
-        "",
-        "## Dataset Construction",
-        "",
-        "The dataset is derived from the Perception Test train MCQ manifest.",
-        "",
-        f"- source train MCQ rows: {construction['source_train_rows']}",
-        f"- rows with valid local videos and 3 MCQ options: {construction['enriched_rows']}",
-        f"- concrete curated rows after task-family assignment: {construction['curated_rows']}",
-        f"- curated unique videos: {construction['curated_unique_videos']}",
-        f"- main balanced subset: {construction['main_rows']} rows, {construction['main_unique_videos']} videos",
-        f"- same-video control subset: {construction['same_video_rows']} rows, {construction['same_video_unique_videos']} videos",
-        f"- exact row overlap between subsets: {construction['overlap_rows']}",
-        f"- combined deduplicated analysis set: {construction['combined_rows']} rows, {construction['combined_unique_videos']} videos",
-        "",
-        "Task families were assigned from Perception Test tags using the curation script, then the combined analysis deduplicated exact `row_uid` overlaps.",
-        "",
-        "## Global Tradeoff",
-        "",
-    ]
-    global_rows = []
-    for condition in CONDITION_ORDER:
-        row = summary["condition_summary"][condition]
-        global_rows.append(
-            [
-                condition,
-                row["rows"],
-                fmt(row["accuracy"]),
-                fmt(row["accuracy_delta_from_original"]),
-                fmt(row["active_tokens_mean"], 2),
-                fmt(row["reconstruction_l1_mean"], 5),
-                row["fixed_count"],
-                row["lost_count"],
-            ]
-        )
-    lines.extend(
-        markdown_table(
-            ["condition", "rows", "accuracy", "accuracy delta", "active mean", "L1 mean", "fixed", "lost"],
-            global_rows,
-        )
-    )
-
-    lines.extend(["", "## By Major Tag", ""])
-    by_tag_condition = {
-        (row["tag"], row["condition"]): row
-        for row in summary["tag_summaries"]
-    }
-    tag_rows = []
-    for tag in MAJOR_TAGS:
-        if (tag, "original") not in by_tag_condition:
-            continue
-        original = by_tag_condition[(tag, "original")]
-        eps003 = by_tag_condition[(tag, "eps_003")]
-        eps005 = by_tag_condition[(tag, "eps_005")]
-        eps007 = by_tag_condition[(tag, "eps_007")]
-        tag_rows.append(
-            [
-                tag,
-                original["rows"],
-                fmt(original["accuracy"]),
-                fmt(eps003["accuracy"]),
-                fmt(eps005["accuracy"]),
-                fmt(eps007["accuracy"]),
-                fmt(eps007["accuracy_delta_from_original"]),
-            ]
-        )
-    lines.extend(markdown_table(["tag", "n", "original", "eps003", "eps005", "eps007", "eps007 delta"], tag_rows))
-
-    hurt = sorted(
-        [
-            row
-            for row in summary["tag_summaries"]
-            if row.get("condition") == "eps_007"
-            and row["accuracy_delta_from_original"] < 0
-        ],
-        key=lambda row: row["accuracy_delta_from_original"],
-    )
-    lines.extend(["", "## Most Compression-Sensitive Tags At eps007", ""])
-    lines.append("")
-    lines.append("Only tags with negative accuracy delta are included here; stable or improved tags remain in the full major-tag table above.")
-    lines.append("")
-    lines.extend(
-        markdown_table(
-            ["tag", "n", "original", "eps007", "delta"],
-            [
-                [
-                    row["tag"],
-                    row["rows"],
-                    fmt(row["original_accuracy"]),
-                    fmt(row["accuracy"]),
-                    fmt(row["accuracy_delta_from_original"]),
-                ]
-                for row in hurt
-            ],
-        )
-    )
-
-    lines.extend(
-        [
-            "",
-            "## Interpretation",
-            "",
-            "- This combined table is the headline Qwen/KARL result.",
-            "- The same-video subset is intentionally overrepresented in this union because it provides controlled multi-question videos.",
-            "- Exact overlapping questions are counted once.",
-            "- The combined report should be used for overall accuracy and tag trends.",
-        ]
-    )
-    return "\n".join(lines) + "\n"
-
-
 def write_summary_tables(output_dir: Path, question_rows: list[dict[str, Any]], summary: dict[str, Any]) -> None:
     tables_dir = output_dir / "tables"
     write_csv(
@@ -574,13 +440,12 @@ def main() -> int:
     output_dir = resolve_path(args.output_dir, workspace)
     write_summary_tables(output_dir, question_rows, summary)
     write_json(output_dir / "reports" / "combined_qwen_karl_tradeoff_summary.json", summary)
-    write_text(output_dir / "reports" / "combined_qwen_karl_tradeoff_summary.md", build_markdown(summary))
     make_figures(output_dir, summary)
 
     print(f"[combined-qwen-karl] combined rows: {construction['combined_rows']}")
     print(f"[combined-qwen-karl] unique videos: {construction['combined_unique_videos']}")
     print(f"[combined-qwen-karl] overlap rows deduped: {construction['overlap_rows']}")
-    print(f"[combined-qwen-karl] report: {output_dir / 'reports' / 'combined_qwen_karl_tradeoff_summary.md'}")
+    print(f"[combined-qwen-karl] summary JSON: {output_dir / 'reports' / 'combined_qwen_karl_tradeoff_summary.json'}")
     return 0
 
 

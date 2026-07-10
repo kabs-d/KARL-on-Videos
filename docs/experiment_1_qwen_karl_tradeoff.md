@@ -10,6 +10,15 @@ This direction uses Qwen only as a downstream probe. The main object of study is
 
 All questions come from the official **Perception Test train MCQ** annotations. The official data provides the video ID, question, three answer options, answer ID, semantic area, reasoning label, and fine-grained tags.
 
+Construction counts:
+
+```text
+official train MCQ rows: 7392
+rows with valid local videos and 3 MCQ options: 7392
+curated concrete rows after task-family assignment: 6507
+curated unique videos: 1934
+```
+
 Two curated subsets are combined:
 
 | subset | rows | videos | purpose |
@@ -47,9 +56,26 @@ The headline observation is that stronger compression lowers Qwen accuracy, but 
 
 ## Tag-Level Behavior
 
+Full major-tag accuracy table:
+
+| tag | n | original | eps=0.03 | eps=0.05 | eps=0.07 | eps=0.07 accuracy delta |
+|---|---:|---:|---:|---:|---:|---:|
+| spatial relations | 210 | 0.5238 | 0.5000 | 0.4429 | 0.4476 | -0.0762 |
+| motion | 172 | 0.5233 | 0.5407 | 0.5233 | 0.5814 | +0.0581 |
+| object recognition | 101 | 0.7327 | 0.5842 | 0.5446 | 0.5446 | -0.1881 |
+| place recognition | 88 | 0.9091 | 0.8182 | 0.8182 | 0.6591 | -0.2500 |
+| solidity | 68 | 0.3971 | 0.3971 | 0.3676 | 0.4265 | +0.0294 |
+| sequencing | 80 | 0.6625 | 0.6250 | 0.6000 | 0.6125 | -0.0500 |
+| occlusion | 65 | 0.3846 | 0.4308 | 0.3846 | 0.4462 | +0.0615 |
+| object permanence | 65 | 0.3846 | 0.4308 | 0.3846 | 0.4462 | +0.0615 |
+| object counting | 110 | 0.5909 | 0.5455 | 0.5000 | 0.4818 | -0.1091 |
+| collision | 30 | 0.7667 | 0.6333 | 0.7000 | 0.6333 | -0.1333 |
+| action counting | 45 | 0.3556 | 0.2889 | 0.2889 | 0.2667 | -0.0889 |
+| part recognition | 29 | 0.7931 | 0.7586 | 0.6552 | 0.5172 | -0.2759 |
+
 At `eps=0.07`, the most compression-sensitive tags are recognition/detail-heavy:
 
-| tag | n | original | eps=0.07 | delta |
+| tag | n | original | eps=0.07 | accuracy delta |
 |---|---:|---:|---:|---:|
 | part recognition | 29 | 0.7931 | 0.5172 | -0.2759 |
 | place recognition | 88 | 0.9091 | 0.6591 | -0.2500 |
@@ -58,7 +84,7 @@ At `eps=0.07`, the most compression-sensitive tags are recognition/detail-heavy:
 
 Some temporal and occlusion/permanence-style tags are more stable in this run:
 
-| tag | n | original | eps=0.07 | delta |
+| tag | n | original | eps=0.07 | accuracy delta |
 |---|---:|---:|---:|---:|
 | motion | 172 | 0.5233 | 0.5814 | +0.0581 |
 | occlusion | 65 | 0.3846 | 0.4462 | +0.0615 |
@@ -75,9 +101,8 @@ In the same-video subset, among clips containing both tags at `eps=0.07`, motion
 
 ## Artifacts
 
-The main reader-facing result is this page. The supporting combined summary contains the dataset construction counts, global tradeoff table, full major-tag table, and the negative-delta compression-sensitive tag table.
+The main reader-facing result is this page. The table below is included as a compact machine-readable artifact for the major-tag numbers.
 
-- [Combined summary](../results/combined_qwen_karl_v1/reports/combined_qwen_karl_tradeoff_summary.md)
 - [Major-tag accuracy](../results/combined_qwen_karl_v1/tables/combined_major_tag_accuracy.csv)
 
 Relevant scripts:
