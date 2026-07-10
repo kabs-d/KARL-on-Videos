@@ -75,4 +75,4 @@ Task families were assigned from Perception Test tags using the curation script,
 - This combined table is the headline Qwen/KARL result.
 - The same-video subset is intentionally overrepresented in this union because it provides controlled multi-question videos.
 - Exact overlapping questions are counted once.
-- The same-video report should be used for case studies; this combined report should be used for overall accuracy and tag/family trends.
+- The combined report should be used for overall accuracy and tag/family trends.

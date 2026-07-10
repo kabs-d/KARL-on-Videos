@@ -18,7 +18,6 @@ Packaged artifacts:
 
 ```text
 results/combined_qwen_karl_v1/
-results/same_video_question_effects_v1/
 ```
 
 Main signal:

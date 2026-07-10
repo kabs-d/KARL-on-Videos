@@ -38,7 +38,7 @@ Global result:
 | KARL eps=0.05 | 0.5512 | 191.16 |
 | KARL eps=0.07 | 0.5301 | 111.10 |
 
-The main pattern is task-dependent compression sensitivity: recognition/detail-heavy tags degrade most, while motion and occlusion-style tags are more stable in this run. The same-video control subset also shows that different questions on the same compressed visual evidence can be helped or hurt differently.
+The main pattern is task-dependent compression sensitivity: recognition/detail-heavy tags degrade most, while motion and occlusion-style tags are more stable in this run. In the same-video subset, among clips containing both tags at `eps=0.07`, motion questions were more often correct than action-counting questions on the same videos.
 
 See the detailed note: [Direction 1: KARL Reconstructions and Downstream VLM Behavior](docs/experiment_1_qwen_karl_tradeoff.md).
 
@@ -67,7 +67,6 @@ Included for Direction 1:
 - [Family accuracy table](results/combined_qwen_karl_v1/tables/combined_family_accuracy.csv)
 - [Accuracy vs active tokens](results/combined_qwen_karl_v1/figures/combined_accuracy_vs_active_tokens.png)
 - [Tag accuracy heatmap](results/combined_qwen_karl_v1/figures/combined_tag_accuracy_heatmap.png)
-- [Same-video question effects](results/same_video_question_effects_v1/reports/same_video_question_effects_summary.md)
 
 Excluded:
 
@@ -89,7 +88,6 @@ run_qwen_perception_calibration.py
 run_karl_reconstruction_mdl.py
 run_qwen_on_karl_reconstructions.py
 analyze_combined_qwen_karl_tradeoff.py
-analyze_same_video_question_effects.py
 ```
 
 They assume local access to the Perception Test train MCQ data, a KARL VQGAN checkpoint, and a Qwen2.5-VL environment.

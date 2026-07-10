@@ -65,24 +65,9 @@ Some temporal and occlusion/permanence-style tags are more stable in this run:
 
 These trends suggest that KARL compression affects different kinds of visual evidence differently. In this run, temporal and occlusion-style questions were more robust than recognition/detail-heavy questions. While not conclusive, this points to a plausible pattern: KARL reconstructions may preserve enough coarse visual structure for some higher-level tasks, but lose fine-grained details needed for recognition and part-level questions.
 
-## Same-Video Control
+## Same-Video Observation
 
-The same-video subset keeps visual evidence fixed at the video level and varies the question. This helps separate "the video became harder after reconstruction" from "this particular question needs evidence that is more compression-sensitive."
-
-At `eps=0.07`:
-
-```text
-60 unique videos
-385 question rows
-50 / 60 videos had at least one changed question outcome
-26 / 60 videos had at least one fixed question
-44 / 60 videos had at least one lost question
-20 / 60 videos had both fixed and lost questions on the same video
-```
-
-A `fixed` question means original Qwen was wrong and Qwen on KARL reconstruction became correct. A `lost` question means original Qwen was correct and Qwen on KARL reconstruction became wrong.
-
-This supports the central interpretation: the effect of KARL reconstruction is question-conditioned. The same compressed frames can preserve enough evidence for one question while harming another question about the same clip.
+In the same-video subset, among clips containing both tags at `eps=0.07`, motion questions were more often correct than action-counting questions on the same videos.
 
 ## Artifacts
 
@@ -93,8 +78,6 @@ Main result files:
 - [Family accuracy](../results/combined_qwen_karl_v1/tables/combined_family_accuracy.csv)
 - [Accuracy vs active tokens](../results/combined_qwen_karl_v1/figures/combined_accuracy_vs_active_tokens.png)
 - [Tag accuracy heatmap](../results/combined_qwen_karl_v1/figures/combined_tag_accuracy_heatmap.png)
-- [Same-video question effects](../results/same_video_question_effects_v1/reports/same_video_question_effects_summary.md)
-- [Same-video case index](../results/same_video_question_effects_v1/tables/same_video_case_index.csv)
 
 Relevant scripts:
 
@@ -103,10 +86,9 @@ Relevant scripts:
 - [run_karl_reconstruction_mdl.py](../scripts/run_karl_reconstruction_mdl.py)
 - [run_qwen_on_karl_reconstructions.py](../scripts/run_qwen_on_karl_reconstructions.py)
 - [analyze_combined_qwen_karl_tradeoff.py](../scripts/analyze_combined_qwen_karl_tradeoff.py)
-- [analyze_same_video_question_effects.py](../scripts/analyze_same_video_question_effects.py)
 
 ## Interpretation
 
-This direction establishes a downstream sanity check for using KARL on video frames. KARL reconstructions are not lossless, and recognition/detail-heavy tasks are the first to suffer. But the degradation is structured rather than uniform: a much smaller active-token set can still preserve enough information for many MCQ decisions, and same-video comparisons show that the effect depends on the kind of evidence a question asks for.
+This direction establishes a downstream sanity check for using KARL on video frames. KARL reconstructions are not lossless, and recognition/detail-heavy tasks are the first to suffer. But the degradation is structured rather than uniform: a much smaller active-token set can still preserve enough information for many MCQ decisions.
 
 The follow-up directions move away from Qwen and analyze KARL's internal tokenizer behavior directly.
