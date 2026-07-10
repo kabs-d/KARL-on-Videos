@@ -4,7 +4,7 @@ This repository is an exploratory extension of **KARL** from images to short vid
 
 > What does KARL's adaptive image tokenizer preserve, discard, and organize when it is applied frame-by-frame to video QA examples?
 
-The project uses short videos from the **Perception Test** train MCQ split and treats KARL as an image tokenizer applied to sampled video frames. The goal is not to claim a new benchmark result, but to build focused analysis probes around token usage, compression, reconstruction, and latent attention behavior.
+The project uses short videos from the **Perception Test** train MCQ split and treats KARL as an image tokenizer applied to sampled video frames. The goal is to build focused analysis probes around token usage, compression, reconstruction, and latent attention behavior.
 
 ## Analysis Directions
 
