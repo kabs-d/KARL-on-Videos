@@ -63,7 +63,7 @@ Some temporal and occlusion/permanence-style tags are more stable in this run:
 | object permanence | 65 | 0.3846 | 0.4462 | +0.0615 |
 | solidity | 68 | 0.3971 | 0.4265 | +0.0294 |
 
-This should be read cautiously: it is a model-behavior probe, not proof that KARL improves temporal reasoning. The safer conclusion is that KARL compression affects visual evidence unevenly across task tags.
+These trends suggest that KARL compression affects different kinds of visual evidence differently. In this run, temporal and occlusion-style questions were more robust than recognition/detail-heavy questions. While not conclusive, this points to a plausible pattern: KARL reconstructions may preserve enough coarse visual structure for some higher-level tasks, but lose fine-grained details needed for recognition and part-level questions.
 
 ## Same-Video Control
 
