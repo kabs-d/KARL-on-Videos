@@ -1,4 +1,4 @@
-# Direction 1: KARL Reconstructions And Downstream VLM Behavior
+# Direction 2: KARL Reconstructions And Downstream VLM Behavior
 
 ## Research Question
 
@@ -26,7 +26,7 @@ Two curated subsets are combined:
 | main balanced subset | 300 | 285 | broad task/tag coverage |
 | same-video control subset | 385 | 60 | multiple questions on the same visual evidence |
 | exact overlap | 21 | - | removed during deduplication |
-| combined analysis set | 664 | 324 | final Direction 1 set |
+| combined analysis set | 664 | 324 | final Direction 2 set |
 
 The same-video subset is intentionally not a random sample. It is enriched for videos with multiple question types so we can compare different questions over shared frames.
 

@@ -12,14 +12,14 @@ The repository is organized as four linked analysis notes. I am packaging them o
 
 | direction | status | note |
 |---|---|---|
-| 1. KARL reconstructions and downstream VLM behavior | packaged | [analysis README](docs/experiment_1_qwen_karl_tradeoff.md) |
-| 2. Epsilon vs token utilization over video frames | next | README coming next |
+| 1. Object-like and temporally persistent read attention | next | README coming next |
+| 2. KARL reconstructions and downstream VLM behavior | packaged | [analysis README](docs/experiment_2_qwen_karl_tradeoff.md) |
 | 3. Higher compression keeps more distinct tokens | next | README coming next |
-| 4. Object-like and temporally persistent read attention | next | README coming next |
+| 4. Epsilon vs token utilization over video frames | next | README coming next |
 
-## Direction 1 Snapshot
+## Direction 2 Snapshot
 
-The first packaged direction asks whether Qwen2.5-VL-7B-Instruct can still answer Perception Test MCQs when original frames are replaced by KARL reconstructions at different epsilon thresholds.
+The currently packaged direction asks whether Qwen2.5-VL-7B-Instruct can still answer Perception Test MCQs when original frames are replaced by KARL reconstructions at different epsilon thresholds.
 
 Combined analysis set:
 
@@ -40,7 +40,7 @@ Global result:
 
 The main pattern is task-dependent compression sensitivity: recognition/detail-heavy tags degrade most, while motion and occlusion-style tags are more stable in this run. In the same-video subset, among clips containing both tags at `eps=0.07`, motion questions were more often correct than action-counting questions on the same videos.
 
-See the detailed note: [Direction 1: KARL Reconstructions and Downstream VLM Behavior](docs/experiment_1_qwen_karl_tradeoff.md).
+See the detailed note: [Direction 2: KARL Reconstructions and Downstream VLM Behavior](docs/experiment_2_qwen_karl_tradeoff.md).
 
 ## Dataset Construction
 
@@ -60,12 +60,12 @@ See [docs/dataset_construction.md](docs/dataset_construction.md) for the exact c
 
 This repository includes compact scripts, aggregate reports, tables, and figures. It intentionally excludes large data artifacts.
 
-Included for Direction 1:
+Included for Direction 2:
 
-- [Direction 1 detailed README](docs/experiment_1_qwen_karl_tradeoff.md)
+- [Direction 2 detailed README](docs/experiment_2_qwen_karl_tradeoff.md)
 - [Major-tag accuracy table](results/combined_qwen_karl_v1/tables/combined_major_tag_accuracy.csv)
 
-The main Direction 1 README embeds the accuracy/token plot and tag heatmap directly, so they are not listed as separate reader-facing artifacts here.
+The main Direction 2 README embeds the accuracy/token plot and tag heatmap directly, so they are not listed as separate reader-facing artifacts here.
 
 Excluded:
 
