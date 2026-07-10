@@ -1,70 +1,112 @@
-# Experiment 1: Qwen on KARL Reconstructions
+# Direction 1: KARL Reconstructions And Downstream VLM Behavior
 
-## Question
+## Research Question
 
-When original video frames are replaced by KARL reconstructions, how much does Qwen's multiple-choice video QA accuracy change across task types and reconstruction-quality thresholds?
+If original video frames are replaced by KARL reconstructions, which Perception Test question types remain answerable by Qwen and which degrade as KARL uses fewer active tokens?
 
-## Setup
+This direction uses Qwen only as a downstream probe. The main object of study is still KARL: how much task-relevant visual information survives at different reconstruction-quality thresholds.
 
-- Dataset: combined curated Perception Test train MCQ subset
-- Questions: 664 deduplicated MCQs
-- Videos: 324 unique videos
-- Frame sampling: 8 uniformly sampled frames per question/video
+## Dataset
+
+All questions come from the official **Perception Test train MCQ** annotations. The official data provides the video ID, question, three answer options, answer ID, semantic area, reasoning label, and fine-grained tags.
+
+Two curated subsets are combined:
+
+| subset | rows | videos | purpose |
+|---|---:|---:|---|
+| main balanced subset | 300 | 285 | broad task/tag coverage |
+| same-video control subset | 385 | 60 | multiple questions on the same visual evidence |
+| exact overlap | 21 | - | removed during deduplication |
+| combined analysis set | 664 | 324 | final Direction 1 set |
+
+The same-video subset is intentionally not a random sample. It is enriched for videos with multiple question types so we can compare different questions over shared frames.
+
+## Evaluation Setup
+
 - VLM: Qwen2.5-VL
-- KARL path: `karl_small` with VQGAN quantized latents
-- Epsilon thresholds: `0.03`, `0.05`, `0.07`
+- Tokenizer: `karl_small` with VQGAN quantized latents
+- Frame sampling: 8 uniformly sampled RGB frames per question/video
+- Image size: 256 x 256
+- Conditions: original frames, KARL reconstructions at `eps=0.03`, `eps=0.05`, `eps=0.07`
+- Task metadata: Perception Test tags plus broader task-family groupings from the curation script
 
-## Conditions
+The original-frame Qwen run is the baseline. For each epsilon, sampled frames are passed through KARL, reconstructed, and then used as Qwen's visual input with the same MCQ prompt.
 
-| condition | frame source |
-|---|---|
-| original | original sampled RGB frames |
-| eps=0.03 | KARL reconstructions with epsilon 0.03 |
-| eps=0.05 | KARL reconstructions with epsilon 0.05 |
-| eps=0.07 | KARL reconstructions with epsilon 0.07 |
+## Global Tradeoff
 
-## Headline Result
+| condition | rows | Qwen accuracy | delta | mean active KARL tokens | reconstruction L1 |
+|---|---:|---:|---:|---:|---:|
+| original frames | 664 | 0.6280 | 0.0000 | 256.00 | 0.00000 |
+| KARL eps=0.03 | 664 | 0.5858 | -0.0422 | 248.40 | 0.04296 |
+| KARL eps=0.05 | 664 | 0.5512 | -0.0768 | 191.16 | 0.04705 |
+| KARL eps=0.07 | 664 | 0.5301 | -0.0979 | 111.10 | 0.05964 |
 
-| condition | Qwen accuracy | mean active tokens |
-|---|---:|---:|
-| original | 0.6280 | 256.00 |
-| eps=0.03 | 0.5858 | 248.40 |
-| eps=0.05 | 0.5512 | 191.16 |
-| eps=0.07 | 0.5301 | 111.10 |
+The headline observation is that stronger compression lowers Qwen accuracy, but the drop is not uniform across question types. At `eps=0.07`, the mean active token count is less than half the original 256-token budget while Qwen retains a substantial fraction of baseline accuracy.
 
-Accuracy drops as compression becomes stronger, but the degradation is not uniform across tasks.
+## Tag-Level Behavior
 
-## Task Sensitivity
+At `eps=0.07`, the most compression-sensitive tags are recognition/detail-heavy:
 
-At `eps=0.07`, recognition-like tasks are most compression-sensitive:
+| tag | n | original | eps=0.07 | delta |
+|---|---:|---:|---:|---:|
+| part recognition | 29 | 0.7931 | 0.5172 | -0.2759 |
+| place recognition | 88 | 0.9091 | 0.6591 | -0.2500 |
+| object recognition | 101 | 0.7327 | 0.5446 | -0.1881 |
+| object counting | 110 | 0.5909 | 0.4818 | -0.1091 |
 
-| tag | delta from original |
-|---|---:|
-| part recognition | -0.2759 |
-| place recognition | -0.2500 |
-| object recognition | -0.1881 |
+Some temporal and occlusion/permanence-style tags are more stable in this run:
 
-Temporal/occlusion-oriented tags are more stable in this run:
+| tag | n | original | eps=0.07 | delta |
+|---|---:|---:|---:|---:|
+| motion | 172 | 0.5233 | 0.5814 | +0.0581 |
+| occlusion | 65 | 0.3846 | 0.4462 | +0.0615 |
+| object permanence | 65 | 0.3846 | 0.4462 | +0.0615 |
+| solidity | 68 | 0.3971 | 0.4265 | +0.0294 |
 
-| tag | delta from original |
-|---|---:|
-| motion | +0.0581 |
-| occlusion | +0.0615 |
-| object permanence | +0.0615 |
+This should be read cautiously: it is a model-behavior probe, not proof that KARL improves temporal reasoning. The safer conclusion is that KARL compression affects visual evidence unevenly across task tags.
 
 ## Same-Video Control
 
-The same-video subset lets us compare multiple questions about the same video. At `eps=0.07`:
+The same-video subset keeps visual evidence fixed at the video level and varies the question. This helps separate "the video became harder after reconstruction" from "this particular question needs evidence that is more compression-sensitive."
+
+At `eps=0.07`:
 
 ```text
+60 unique videos
+385 question rows
 50 / 60 videos had at least one changed question outcome
-26 / 60 had at least one fixed question
-44 / 60 had at least one lost question
-20 / 60 had both fixed and lost questions on the same video
+26 / 60 videos had at least one fixed question
+44 / 60 videos had at least one lost question
+20 / 60 videos had both fixed and lost questions on the same video
 ```
 
-This supports the interpretation that compression sensitivity depends on the question's required evidence, not only the underlying video.
+A `fixed` question means original Qwen was wrong and Qwen on KARL reconstruction became correct. A `lost` question means original Qwen was correct and Qwen on KARL reconstruction became wrong.
+
+This supports the central interpretation: the effect of KARL reconstruction is question-conditioned. The same compressed frames can preserve enough evidence for one question while harming another question about the same clip.
+
+## Artifacts
+
+Main result files:
+
+- [Combined summary](../results/combined_qwen_karl_v1/reports/combined_qwen_karl_tradeoff_summary.md)
+- [Major-tag accuracy](../results/combined_qwen_karl_v1/tables/combined_major_tag_accuracy.csv)
+- [Family accuracy](../results/combined_qwen_karl_v1/tables/combined_family_accuracy.csv)
+- [Accuracy vs active tokens](../results/combined_qwen_karl_v1/figures/combined_accuracy_vs_active_tokens.png)
+- [Tag accuracy heatmap](../results/combined_qwen_karl_v1/figures/combined_tag_accuracy_heatmap.png)
+- [Same-video question effects](../results/same_video_question_effects_v1/reports/same_video_question_effects_summary.md)
+- [Same-video case index](../results/same_video_question_effects_v1/tables/same_video_case_index.csv)
+
+Relevant scripts:
+
+- [curate_task_data.py](../scripts/curate_task_data.py)
+- [run_qwen_perception_calibration.py](../scripts/run_qwen_perception_calibration.py)
+- [run_karl_reconstruction_mdl.py](../scripts/run_karl_reconstruction_mdl.py)
+- [run_qwen_on_karl_reconstructions.py](../scripts/run_qwen_on_karl_reconstructions.py)
+- [analyze_combined_qwen_karl_tradeoff.py](../scripts/analyze_combined_qwen_karl_tradeoff.py)
+- [analyze_same_video_question_effects.py](../scripts/analyze_same_video_question_effects.py)
 
 ## Interpretation
 
-KARL reconstructions preserve enough information for many MCQ decisions even with a much smaller active token budget, but compression affects question types differently. Recognition and fine part/detail questions degrade more sharply, while some motion and occlusion-style questions are comparatively robust.
+This direction establishes a downstream sanity check for using KARL on video frames. KARL reconstructions are not lossless, and recognition/detail-heavy tasks are the first to suffer. But the degradation is structured rather than uniform: a much smaller active-token set can still preserve enough information for many MCQ decisions, and same-video comparisons show that the effect depends on the kind of evidence a question asks for.
+
+The follow-up directions move away from Qwen and analyze KARL's internal tokenizer behavior directly.
