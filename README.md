@@ -19,7 +19,7 @@ The repository is organized as four linked analysis notes. I am packaging them o
 
 ## Direction 1 Snapshot
 
-The first packaged direction asks whether Qwen can still answer Perception Test MCQs when original frames are replaced by KARL reconstructions at different epsilon thresholds.
+The first packaged direction asks whether Qwen2.5-VL-7B-Instruct can still answer Perception Test MCQs when original frames are replaced by KARL reconstructions at different epsilon thresholds.
 
 Combined analysis set:
 
