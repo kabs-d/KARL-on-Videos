@@ -64,9 +64,8 @@ Included for Direction 1:
 
 - [Combined Qwen/KARL summary](results/combined_qwen_karl_v1/reports/combined_qwen_karl_tradeoff_summary.md)
 - [Major-tag accuracy table](results/combined_qwen_karl_v1/tables/combined_major_tag_accuracy.csv)
-- [Family accuracy table](results/combined_qwen_karl_v1/tables/combined_family_accuracy.csv)
-- [Accuracy vs active tokens](results/combined_qwen_karl_v1/figures/combined_accuracy_vs_active_tokens.png)
-- [Tag accuracy heatmap](results/combined_qwen_karl_v1/figures/combined_tag_accuracy_heatmap.png)
+
+The main Direction 1 README embeds the accuracy/token plot and tag heatmap directly, so they are not listed as separate reader-facing artifacts here.
 
 Excluded:
 

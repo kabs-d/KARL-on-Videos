@@ -43,6 +43,8 @@ The original-frame Qwen run is the baseline. For each epsilon, sampled frames ar
 
 The headline observation is that stronger compression lowers Qwen accuracy, but the drop is not uniform across question types. At `eps=0.07`, the mean active token count is less than half the original 256-token budget while Qwen retains a substantial fraction of baseline accuracy.
 
+![Qwen accuracy vs active KARL tokens](../results/combined_qwen_karl_v1/figures/combined_accuracy_vs_active_tokens.png)
+
 ## Tag-Level Behavior
 
 At `eps=0.07`, the most compression-sensitive tags are recognition/detail-heavy:
@@ -65,19 +67,18 @@ Some temporal and occlusion/permanence-style tags are more stable in this run:
 
 These trends suggest that KARL compression affects different kinds of visual evidence differently. In this run, temporal and occlusion-style questions were more robust than recognition/detail-heavy questions. While not conclusive, this points to a plausible pattern: KARL reconstructions may preserve enough coarse visual structure for some higher-level tasks, but lose fine-grained details needed for recognition and part-level questions.
 
+![Tag-wise Qwen accuracy heatmap](../results/combined_qwen_karl_v1/figures/combined_tag_accuracy_heatmap.png)
+
 ## Same-Video Observation
 
 In the same-video subset, among clips containing both tags at `eps=0.07`, motion questions were more often correct than action-counting questions on the same videos.
 
 ## Artifacts
 
-Main result files:
+The main reader-facing result is this page. The supporting combined summary contains the dataset construction counts, global tradeoff table, full major-tag table, and the negative-delta compression-sensitive tag table.
 
 - [Combined summary](../results/combined_qwen_karl_v1/reports/combined_qwen_karl_tradeoff_summary.md)
 - [Major-tag accuracy](../results/combined_qwen_karl_v1/tables/combined_major_tag_accuracy.csv)
-- [Family accuracy](../results/combined_qwen_karl_v1/tables/combined_family_accuracy.csv)
-- [Accuracy vs active tokens](../results/combined_qwen_karl_v1/figures/combined_accuracy_vs_active_tokens.png)
-- [Tag accuracy heatmap](../results/combined_qwen_karl_v1/figures/combined_tag_accuracy_heatmap.png)
 
 Relevant scripts:
 

@@ -316,30 +316,6 @@ def build_markdown(summary: dict[str, Any]) -> str:
         )
     )
 
-    lines.extend(["", "## By Primary Task Family", ""])
-    family_rows = []
-    by_family_condition = {
-        (row["family"], row["condition"]): row
-        for row in summary["family_summaries"]
-    }
-    for family in sorted({row["family"] for row in summary["family_summaries"]}):
-        original = by_family_condition[(family, "original")]
-        eps003 = by_family_condition[(family, "eps_003")]
-        eps005 = by_family_condition[(family, "eps_005")]
-        eps007 = by_family_condition[(family, "eps_007")]
-        family_rows.append(
-            [
-                family,
-                original["rows"],
-                fmt(original["accuracy"]),
-                fmt(eps003["accuracy"]),
-                fmt(eps005["accuracy"]),
-                fmt(eps007["accuracy"]),
-                fmt(eps007["accuracy_delta_from_original"]),
-            ]
-        )
-    lines.extend(markdown_table(["family", "n", "original", "eps003", "eps005", "eps007", "eps007 delta"], family_rows))
-
     lines.extend(["", "## By Major Tag", ""])
     by_tag_condition = {
         (row["tag"], row["condition"]): row
@@ -371,10 +347,14 @@ def build_markdown(summary: dict[str, Any]) -> str:
             row
             for row in summary["tag_summaries"]
             if row.get("condition") == "eps_007"
+            and row["accuracy_delta_from_original"] < 0
         ],
         key=lambda row: row["accuracy_delta_from_original"],
     )
     lines.extend(["", "## Most Compression-Sensitive Tags At eps007", ""])
+    lines.append("")
+    lines.append("Only tags with negative accuracy delta are included here; stable or improved tags remain in the full major-tag table above.")
+    lines.append("")
     lines.extend(
         markdown_table(
             ["tag", "n", "original", "eps007", "delta"],
@@ -399,7 +379,7 @@ def build_markdown(summary: dict[str, Any]) -> str:
             "- This combined table is the headline Qwen/KARL result.",
             "- The same-video subset is intentionally overrepresented in this union because it provides controlled multi-question videos.",
             "- Exact overlapping questions are counted once.",
-            "- The combined report should be used for overall accuracy and tag/family trends.",
+            "- The combined report should be used for overall accuracy and tag trends.",
         ]
     )
     return "\n".join(lines) + "\n"
@@ -433,24 +413,6 @@ def write_summary_tables(output_dir: Path, question_rows: list[dict[str, Any]], 
             "outcome",
             "active_tokens_mean",
             "reconstruction_l1_mean",
-        ],
-    )
-    write_csv(
-        tables_dir / "combined_family_accuracy.csv",
-        summary["family_summaries"],
-        [
-            "family",
-            "condition",
-            "rows",
-            "accuracy",
-            "original_accuracy",
-            "accuracy_delta_from_original",
-            "active_tokens_mean",
-            "reconstruction_l1_mean",
-            "fixed_count",
-            "lost_count",
-            "kept_correct_count",
-            "kept_wrong_count",
         ],
     )
     write_csv(

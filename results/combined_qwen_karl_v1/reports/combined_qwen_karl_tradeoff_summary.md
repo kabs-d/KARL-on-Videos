@@ -26,16 +26,6 @@ Task families were assigned from Perception Test tags using the curation script,
 | eps_005 | 664 | 0.5512 | -0.0768 | 191.16 | 0.04705 | 41 | 92 |
 | eps_007 | 664 | 0.5301 | -0.0979 | 111.10 | 0.05964 | 56 | 121 |
 
-## By Primary Task Family
-
-| family | n | original | eps003 | eps005 | eps007 | eps007 delta |
-| --- | --- | --- | --- | --- | --- | --- |
-| object_counting | 97 | 0.6289 | 0.5876 | 0.5361 | 0.5052 | -0.1237 |
-| occlusion_permanence | 125 | 0.4800 | 0.4400 | 0.4320 | 0.4560 | -0.0240 |
-| recognition_control | 118 | 0.8898 | 0.7627 | 0.7288 | 0.6017 | -0.2881 |
-| spatial_relations | 186 | 0.6183 | 0.5968 | 0.5376 | 0.5215 | -0.0968 |
-| temporal_event | 138 | 0.5507 | 0.5507 | 0.5362 | 0.5652 | 0.0145 |
-
 ## By Major Tag
 
 | tag | n | original | eps003 | eps005 | eps007 | eps007 delta |
@@ -55,6 +45,8 @@ Task families were assigned from Perception Test tags using the curation script,
 
 ## Most Compression-Sensitive Tags At eps007
 
+Only tags with negative accuracy delta are included here; stable or improved tags remain in the full major-tag table above.
+
 | tag | n | original | eps007 | delta |
 | --- | --- | --- | --- | --- |
 | part recognition | 29 | 0.7931 | 0.5172 | -0.2759 |
@@ -65,14 +57,10 @@ Task families were assigned from Perception Test tags using the curation script,
 | action counting | 45 | 0.3556 | 0.2667 | -0.0889 |
 | spatial relations | 210 | 0.5238 | 0.4476 | -0.0762 |
 | sequencing | 80 | 0.6625 | 0.6125 | -0.0500 |
-| solidity | 68 | 0.3971 | 0.4265 | 0.0294 |
-| motion | 172 | 0.5233 | 0.5814 | 0.0581 |
-| occlusion | 65 | 0.3846 | 0.4462 | 0.0615 |
-| object permanence | 65 | 0.3846 | 0.4462 | 0.0615 |
 
 ## Interpretation
 
 - This combined table is the headline Qwen/KARL result.
 - The same-video subset is intentionally overrepresented in this union because it provides controlled multi-question videos.
 - Exact overlapping questions are counted once.
-- The combined report should be used for overall accuracy and tag/family trends.
+- The combined report should be used for overall accuracy and tag trends.
