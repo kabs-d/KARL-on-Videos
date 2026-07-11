@@ -19,13 +19,13 @@ The repository is organized as four linked analysis notes. I am packaging them o
 
 ## Direction 1 Snapshot
 
-The first packaged direction looks inside KARL's adaptive tokenizer before any downstream QA model is used. For selected active latent indices, it visualizes encoder read attention from the latent query to the original `16x16` image/VQGAN grid:
+The first direction looks inside KARL's adaptive tokenizer before any downstream QA model is used. For selected active latent indices, it visualizes encoder attention map from the latent query to the original `16x16` image/VQGAN grid:
 
 ```text
 read_map(k) = mean_heads Attention(q_latent[k], K_input_grid)
 ```
 
-On cup-moving clips, several selected latent indices produce compact maps on object-like regions such as cups or hands. The temporal table then keeps the latent index fixed across 8 uniformly sampled frames to check whether the read map remains spatially concentrated.
+On cup-moving clips, several selected latent indices produce compact maps on object-like regions such as cups or hands. The temporal table then keeps the latent index fixed across 8 uniformly sampled frames to check whether the read map remains spatially concentrated across frames in a video.
 
 Preview:
 
