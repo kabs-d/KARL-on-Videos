@@ -7,7 +7,7 @@ This note visualizes where selected active KARL latent indices read from in shor
 KARL reads a frame through an encoder attention block that mixes latent-token queries with the original `16×16` image/VQGAN grid. For an active latent index `k`, I extract the attention map from latent query `k` to the image-grid keys:
 
 ```text
-read_map(k) = mean_heads Attention(q_latent[k], K_input_grid) in R^{16x16}
+attention_map(k) = mean_heads Attention(q_latent[k], K_input_grid) in R^{16x16}
 ```
 
 This map shows which input grid locations a latent token attends to while forming its representation.
