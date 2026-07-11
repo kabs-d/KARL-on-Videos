@@ -15,7 +15,7 @@ The repository is organized as four linked analysis notes. I am packaging them o
 | 1. Object-like and temporally persistent attention maps | packaged | [analysis README](docs/experiment_1_object_read_attention.md) |
 | 2. KARL reconstructions and downstream VLM behavior | packaged | [analysis README](docs/experiment_2_qwen_karl_tradeoff.md) |
 | 3. Higher compression keeps more distinct tokens | packaged | [analysis README](docs/experiment_3_latent_distinctiveness.md) |
-| 4. Epsilon vs token utilization over video frames | next | README coming next |
+| 4. Epsilon vs token utilization over video frames | packaged | [analysis README](docs/experiment_4_temporal_token_usage.md) |
 
 ## Direction 1 Snapshot
 
@@ -82,6 +82,22 @@ The pattern is sharp: as epsilon increases, KARL keeps fewer tokens, but those t
 
 See the detailed note: [Direction 3: Compression Keeps More Distinct Latent Attention Maps](docs/experiment_3_latent_distinctiveness.md).
 
+## Direction 4 Snapshot
+
+Direction 4 tracks KARL's active token count across 8 uniformly sampled frames from the same video.
+
+| epsilon | mean active-token std | mean active-token range | zero-range videos | corr(active tokens, frame diff) |
+|---|---:|---:|---:|---:|
+| 0.03 | 4.29 | 10.98 | 43 | 0.025 |
+| 0.05 | 21.38 | 59.43 | 11 | 0.049 |
+| 0.07 | 20.88 | 57.37 | 6 | -0.053 |
+
+The pattern is that temporal variation is almost flat near the full-token setting, then becomes much larger once compression is stronger. A simple RGB frame-difference signal does not explain this variation well on average.
+
+![Active-token variation by epsilon](results/temporal_token_usage_v1/figures/active_variation_by_epsilon.png)
+
+See the detailed note: [Direction 4: Temporal Token Usage](docs/experiment_4_temporal_token_usage.md).
+
 ## Dataset Construction
 
 No new question annotations are introduced. The questions, answer options, answer IDs, tags, reasoning labels, and videos come from the official Perception Test train MCQ annotations.
@@ -108,6 +124,8 @@ Included packaged artifacts:
 - [Major-tag accuracy table](results/combined_qwen_karl_v1/tables/combined_major_tag_accuracy.csv)
 - [Direction 3 detailed README](docs/experiment_3_latent_distinctiveness.md)
 - [Direction 3 latent diversity summary](results/latent_distinctiveness_v1/tables/latent_epsilon_diversity_summary.csv)
+- [Direction 4 detailed README](docs/experiment_4_temporal_token_usage.md)
+- [Direction 4 temporal token usage summary](results/temporal_token_usage_v1/tables/temporal_token_usage_summary.csv)
 
 The Direction 2 and Direction 3 READMEs embed their main figures directly, so those figures are not listed separately as reader-facing artifacts here.
 
@@ -133,6 +151,7 @@ run_karl_reconstruction_mdl.py
 run_qwen_on_karl_reconstructions.py
 analyze_combined_qwen_karl_tradeoff.py
 analyze_karl_latent_diversity.py
+analyze_karl_temporal_token_usage.py
 ```
 
 They assume local access to the Perception Test train MCQ data, a KARL VQGAN checkpoint, and a Qwen2.5-VL environment.

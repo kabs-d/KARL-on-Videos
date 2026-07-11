@@ -92,14 +92,27 @@ Question:
 
 > How does KARL's active token count vary across frames in the same video as epsilon changes?
 
-Intended artifacts:
+Status:
 
 ```text
-frame-level active-token traces
-per-video token-usage plots
-summary tables by epsilon
+packaged in this repository
 ```
 
-Interpretation target:
+Packaged artifacts:
 
-KARL should not be summarized only by a single average token count. In videos, active-token usage can vary frame-to-frame, and that variation is part of the tokenizer behavior.
+```text
+docs/experiment_4_temporal_token_usage.md
+results/temporal_token_usage_v1/
+```
+
+Main signal:
+
+```text
+eps=0.03: active-token std 4.29,  zero-range videos 43/60
+eps=0.05: active-token std 21.38, zero-range videos 11/60
+eps=0.07: active-token std 20.88, zero-range videos 6/60
+```
+
+Interpretation:
+
+KARL should not be summarized only by a single average token count. In videos, active-token usage can vary frame-to-frame, especially under stronger compression. That variation is not well explained by raw RGB frame difference on average.
