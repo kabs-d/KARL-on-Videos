@@ -69,6 +69,19 @@ eps=0.05: ~199 active tokens, read distinctness 0.79
 eps=0.07: ~116 active tokens, read distinctness 0.86
 ```
 
+Status:
+
+```text
+packaged in this repository
+```
+
+Packaged artifacts:
+
+```text
+docs/experiment_3_latent_distinctiveness.md
+results/latent_distinctiveness_v1/
+```
+
 Interpretation:
 
 Higher compression keeps fewer active latent tokens, but those surviving tokens have less-overlapping read-attention maps. This suggests KARL concentrates its limited token budget over more distinct visual regions.
