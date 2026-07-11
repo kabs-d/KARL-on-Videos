@@ -31,7 +31,7 @@ Settings used here:
 
 ## First-Frame Maps: `video_76`
 
-Each column after the source frame is one active latent index from the same frame. A compact bright region means that latent reads most strongly from that part of the `16×16` input grid.
+Each column after the source frame is the attention map for one active latent index from the same frame. A compact bright region means that latent reads most strongly from that part of the `16×16` input grid. This shows signals towards mapping certain latent tokens to distinct objects in the frames.
 
 <table>
   <tr>
@@ -68,7 +68,7 @@ Each column after the source frame is one active latent index from the same fram
 
 ## First-Frame Maps: `video_1614`
 
-This second clip gives another first-frame check that the read maps are not all diffuse: several selected latent indices place most of their mass on visually distinct cup/table regions.
+This second clip gives another first-frame check that the read attention maps are not all diffuse: several selected latent indices place most of their mass on visually distinct cup/table regions.
 
 <table>
   <tr>
@@ -111,7 +111,7 @@ This second clip gives another first-frame check that the read maps are not all 
 
 ## Temporal Concentration In `video_76`
 
-Columns are time: `f0` to `f7` are the 8 uniformly sampled frames. The first row shows the original frame at each timestep. Each lower row tracks one fixed latent index across those same frames, so vertical comparison shows where that latent reads in a given frame and horizontal comparison shows whether its read map stays compact, shifts, or diffuses over time.
+Columns represent time: f0 to f7 are the 8 uniformly sampled frames from the same video. The first row shows the original frame at each timestep. Each lower row follows one fixed KARL latent index across those frames. The key observation is that several latent indices do not diffuse randomly over time: they remain spatially concentrated in similar regions of the scene across frames. This suggests that, at least in these examples, individual active latent indices can exhibit persistent spatial fixation within a video.
 
 <table>
   <tr>
