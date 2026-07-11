@@ -78,11 +78,13 @@ The question is whether stronger compression leaves behind a collapsed set of si
 
 The pattern is sharp: as epsilon increases, KARL keeps fewer tokens, but those tokens have less-overlapping attention maps. This suggests that compression removes redundant attention patterns first and preserves a smaller, more spatially distinct active set.
 
-Example visual row: `video_76`, frame `f0`, latent `36`.
+Example visual column: `video_76`, frame `f0`, latent `36`.
 
-| source frame | eps=0.03 | eps=0.05 | eps=0.07 |
-|---|---|---|---|
-| <img src="results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_000.png" width="140"> | <img src="results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_003/frame_000.png" width="140"> | <img src="results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_005/frame_000.png" width="140"> | <img src="results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_007/frame_000.png" width="140"> |
+| epsilon | source frame | latent 36 |
+|---|---|---|
+| 0.03 | <img src="results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_000.png" width="130"> | <img src="results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_036/eps_003.png" width="130"> |
+| 0.05 | <img src="results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_000.png" width="130"> | <img src="results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_036/eps_005.png" width="130"> |
+| 0.07 | <img src="results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_000.png" width="130"> | <img src="results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_036/eps_007.png" width="130"> |
 
 See the detailed note: [Direction 3: Compression Keeps More Distinct Latent Attention Maps](docs/experiment_3_latent_distinctiveness.md).
 

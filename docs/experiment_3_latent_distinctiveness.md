@@ -38,73 +38,54 @@ As epsilon increases, KARL keeps fewer active tokens. But the surviving attentio
 
 ## Visual Check
 
-The table below is a qualitative check for the same idea. It tracks one surviving latent index, `latent 36`, across the 8 uniformly sampled frames from `video_76`. Each row uses the same source frame and shows the attention map for the same latent index at `eps=0.03`, `eps=0.05`, and `eps=0.07`.
+The table below is a qualitative check for the same idea. It fixes the visual input to the first sampled frame of `video_76`, then compares several active latent-token attention maps at `eps=0.03`, `eps=0.05`, and `eps=0.07`.
 
-The point is to visually confirm that the surviving attention maps under stronger compression remain compact rather than becoming diffuse leftovers. The aggregate pairwise metrics above make the dataset-level claim; this table gives a concrete frame-level example.
+Rows are epsilon settings. Columns are latent token indices. All listed latent indices are active in this frame for all three epsilon settings. The point is to visually check whether the surviving token set becomes less redundant: at stronger compression, fewer tokens remain active, and the selected surviving maps show more separated attention patterns. The aggregate pairwise metrics above make the dataset-level claim; this table gives a concrete first-frame example.
 
 <table>
   <tr>
-    <th>frame</th>
+    <th>epsilon</th>
     <th>source</th>
-    <th>eps=0.03</th>
-    <th>eps=0.05</th>
-    <th>eps=0.07</th>
+    <th>latent 36</th>
+    <th>latent 38</th>
+    <th>latent 39</th>
+    <th>latent 42</th>
+    <th>latent 132</th>
+    <th>latent 158</th>
+    <th>latent 159</th>
   </tr>
   <tr>
-    <td>f0</td>
-    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_000.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_003/frame_000.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_005/frame_000.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_007/frame_000.png" width="118"></td>
+    <td>0.03</td>
+    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_000.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_036/eps_003.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_038/eps_003.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_039/eps_003.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_042/eps_003.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_132/eps_003.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_158/eps_003.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_159/eps_003.png" width="96"></td>
   </tr>
   <tr>
-    <td>f1</td>
-    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_001.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_003/frame_001.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_005/frame_001.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_007/frame_001.png" width="118"></td>
+    <td>0.05</td>
+    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_000.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_036/eps_005.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_038/eps_005.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_039/eps_005.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_042/eps_005.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_132/eps_005.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_158/eps_005.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_159/eps_005.png" width="96"></td>
   </tr>
   <tr>
-    <td>f2</td>
-    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_002.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_003/frame_002.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_005/frame_002.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_007/frame_002.png" width="118"></td>
-  </tr>
-  <tr>
-    <td>f3</td>
-    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_003.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_003/frame_003.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_005/frame_003.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_007/frame_003.png" width="118"></td>
-  </tr>
-  <tr>
-    <td>f4</td>
-    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_004.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_003/frame_004.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_005/frame_004.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_007/frame_004.png" width="118"></td>
-  </tr>
-  <tr>
-    <td>f5</td>
-    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_005.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_003/frame_005.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_005/frame_005.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_007/frame_005.png" width="118"></td>
-  </tr>
-  <tr>
-    <td>f6</td>
-    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_006.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_003/frame_006.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_005/frame_006.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_007/frame_006.png" width="118"></td>
-  </tr>
-  <tr>
-    <td>f7</td>
-    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_007.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_003/frame_007.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_005/frame_007.png" width="118"></td>
-    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_007/frame_007.png" width="118"></td>
+    <td>0.07</td>
+    <td><img src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_000.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_036/eps_007.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_038/eps_007.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_039/eps_007.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_042/eps_007.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_132/eps_007.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_158/eps_007.png" width="96"></td>
+    <td><img src="../results/latent_distinctiveness_v1/attention_examples/video_76/frame_000/latent_159/eps_007.png" width="96"></td>
   </tr>
 </table>
 

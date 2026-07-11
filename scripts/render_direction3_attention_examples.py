@@ -1,4 +1,4 @@
-"""Render Direction 3 visual attention examples across epsilon settings."""
+"""Render Direction 3 first-frame attention examples across epsilon settings."""
 
 from __future__ import annotations
 
@@ -10,7 +10,8 @@ from PIL import Image
 
 EPSILONS = ("eps_003", "eps_005", "eps_007")
 VIDEO_ID = "video_76"
-LATENT_INDEX = 36
+FRAME_STEM = "frame_000_idx_000000"
+LATENT_INDICES = (36, 38, 39, 42, 132, 158, 159)
 IMAGE_SIZE = 256
 RESAMPLE_BICUBIC = getattr(getattr(Image, "Resampling", Image), "BICUBIC")
 
@@ -41,7 +42,7 @@ def output_base() -> Path:
         / "latent_distinctiveness_v1"
         / "attention_examples"
         / VIDEO_ID
-        / f"latent_{LATENT_INDEX:03d}"
+        / "frame_000"
     )
 
 
@@ -80,20 +81,21 @@ def attention_to_rgb(attention: np.ndarray) -> Image.Image:
     return Image.fromarray(rgb, mode="RGB").resize((IMAGE_SIZE, IMAGE_SIZE), RESAMPLE_BICUBIC)
 
 
-def load_attention(npz_path: Path) -> np.ndarray:
+def load_attention(npz_path: Path, latent_index: int) -> np.ndarray:
     with np.load(npz_path) as data:
         active = data["active_token_indices"].astype(int).tolist()
-        if LATENT_INDEX not in active:
-            raise RuntimeError(f"latent {LATENT_INDEX} is not active in {npz_path}")
-        active_rank = active.index(LATENT_INDEX)
+        if latent_index not in active:
+            raise RuntimeError(f"latent {latent_index} is not active in {npz_path}")
+        active_rank = active.index(latent_index)
         return data["encoder_latent_to_input_grid_attn_16x16"][active_rank]
 
 
 def main() -> int:
     for epsilon in EPSILONS:
-        for frame_position, npz_path in enumerate(sorted((attention_base() / epsilon / VIDEO_ID).glob("frame_*.npz"))):
-            attention = load_attention(npz_path)
-            out = output_base() / epsilon / f"frame_{frame_position:03d}.png"
+        npz_path = attention_base() / epsilon / VIDEO_ID / f"{FRAME_STEM}.npz"
+        for latent_index in LATENT_INDICES:
+            attention = load_attention(npz_path, latent_index)
+            out = output_base() / f"latent_{latent_index:03d}" / f"{epsilon}.png"
             out.parent.mkdir(parents=True, exist_ok=True)
             attention_to_rgb(attention).save(out)
     return 0
