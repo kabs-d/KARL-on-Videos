@@ -19,13 +19,13 @@ The repository is organized as four linked analysis notes. I am packaging them o
 
 ## Direction 1 Snapshot
 
-For selected active latent indices, Direction 1 visualizes the encoder attention map from the latent query to the original `16x16` image/VQGAN grid:
+For selected active latent indices, Direction 1 visualizes the attention map from the latent query to the original `16x16` image/VQGAN grid:
 
 ```text
 read_map(k) = mean_heads Attention(q_latent[k], K_input_grid)
 ```
 
-On cup-moving clips, several selected latent indices produce compact read maps over object-like regions such as cups, hands, and table surfaces. More interestingly, when the same latent index is tracked across 8 uniformly sampled frames from the same video, its read map often remains spatially concentrated instead of becoming diffuse. This suggests that some active KARL latent indices can behave like persistent spatial readers within a video, repeatedly attending to stable scene regions across time.
+On cup-moving clips, several selected latent token indices produce compact attention maps over object-like regions such as cups, hands, and table surfaces. More interestingly, when the same latent token index is tracked across 8 uniformly sampled frames from the same video, its attention map often remains spatially concentrated instead of becoming diffuse. This suggests that some active KARL latent indices can behave like persistent spatial readers within a video, repeatedly attending to stable scene regions across time.
 Preview:
 
 | source frame | latent 36 read map | latent 132 read map |
