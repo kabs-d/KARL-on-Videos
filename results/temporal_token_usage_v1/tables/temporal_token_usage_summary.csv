@@ -1,4 +1,0 @@
-epsilon,videos,frame_epsilon_rows,mean_active_token_std,mean_active_token_range,zero_range_videos,corr_ge_0_5_videos,corr_le_minus_0_5_videos,mean_frame_diff,mean_corr_active_tokens_frame_diff
-0.03,60,480,4.2873,10.9833,43,3,1,0.1366,0.0246
-0.05,60,480,21.3793,59.4333,11,5,3,0.1366,0.0487
-0.07,60,480,20.8774,57.3667,6,8,7,0.1366,-0.0530

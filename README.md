@@ -4,18 +4,17 @@ This repository is an exploratory extension of **KARL** from images to short vid
 
 > What does KARL's adaptive image tokenizer preserve, discard, and organize when it is applied frame-by-frame to video QA examples?
 
-The project uses short videos from the **Perception Test** train MCQ split and treats KARL as an image tokenizer applied to sampled video frames. The goal is to build focused analysis probes around token usage, compression, reconstruction, and latent attention behavior.
+The project uses short videos from the **Perception Test** train MCQ split and treats KARL as an image tokenizer applied to sampled video frames. The goal is to build focused analysis probes around compression, reconstruction, and latent attention behavior.
 
 ## Analysis Directions
 
-The repository is organized as four linked analysis notes. I am packaging them one by one so each can be read independently.
+The repository is organized as three linked analysis notes. Each note can be read independently.
 
 | direction | status | note |
 |---|---|---|
 | 1. Object-like and temporally persistent attention maps | packaged | [analysis README](docs/experiment_1_object_read_attention.md) |
 | 2. KARL reconstructions and downstream VLM behavior | packaged | [analysis README](docs/experiment_2_qwen_karl_tradeoff.md) |
 | 3. Higher compression keeps more distinct tokens | packaged | [analysis README](docs/experiment_3_latent_distinctiveness.md) |
-| 4. Epsilon vs token utilization over video frames | packaged | [analysis README](docs/experiment_4_temporal_token_usage.md) |
 
 ## Direction 1 Snapshot
 
@@ -88,22 +87,6 @@ Example visual column: `video_76`, frame `f0`, latent `36`.
 
 See the detailed note: [Direction 3: Compression Keeps More Distinct Latent Attention Maps](docs/experiment_3_latent_distinctiveness.md).
 
-## Direction 4 Snapshot
-
-Direction 4 tracks KARL's active token count across 8 uniformly sampled frames from the same video.
-
-| epsilon | mean active-token std | mean active-token range | zero-range videos | corr(active tokens, frame diff) |
-|---|---:|---:|---:|---:|
-| 0.03 | 4.29 | 10.98 | 43 | 0.025 |
-| 0.05 | 21.38 | 59.43 | 11 | 0.049 |
-| 0.07 | 20.88 | 57.37 | 6 | -0.053 |
-
-The pattern is that temporal variation is almost flat near the full-token setting, then becomes much larger once compression is stronger. A simple RGB frame-difference signal does not explain this variation well on average.
-
-![Active-token variation by epsilon](results/temporal_token_usage_v1/figures/active_variation_by_epsilon.png)
-
-See the detailed note: [Direction 4: Temporal Token Usage](docs/experiment_4_temporal_token_usage.md).
-
 ## Dataset Construction
 
 No new question annotations are introduced. The questions, answer options, answer IDs, tags, reasoning labels, and videos come from the official Perception Test train MCQ annotations.
@@ -131,8 +114,6 @@ Included packaged artifacts:
 - [Direction 3 detailed README](docs/experiment_3_latent_distinctiveness.md)
 - [Direction 3 latent diversity summary](results/latent_distinctiveness_v1/tables/latent_epsilon_diversity_summary.csv)
 - [Direction 3 visual attention examples](results/latent_distinctiveness_v1/attention_examples)
-- [Direction 4 detailed README](docs/experiment_4_temporal_token_usage.md)
-- [Direction 4 temporal token usage summary](results/temporal_token_usage_v1/tables/temporal_token_usage_summary.csv)
 
 The Direction 2 README embeds its main figures directly. Direction 3 uses compact visual attention examples instead of separate chart artifacts.
 
@@ -159,7 +140,6 @@ run_qwen_on_karl_reconstructions.py
 analyze_combined_qwen_karl_tradeoff.py
 analyze_karl_latent_diversity.py
 render_direction3_attention_examples.py
-analyze_karl_temporal_token_usage.py
 ```
 
 They assume local access to the Perception Test train MCQ data, a KARL VQGAN checkpoint, and a Qwen2.5-VL environment.

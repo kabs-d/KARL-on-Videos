@@ -1,6 +1,6 @@
 # Project Directions
 
-This project is structured as four complementary probes of KARL on short videos.
+This project is structured as three complementary probes of KARL on short videos.
 
 ## 1. Object-Like And Temporally Persistent Attention Maps
 
@@ -85,34 +85,3 @@ results/latent_distinctiveness_v1/
 Interpretation:
 
 Higher compression keeps fewer active latent tokens, but those surviving tokens have less-overlapping attention maps. This suggests KARL concentrates its limited token budget over more distinct visual regions.
-
-## 4. Epsilon vs Token Utilization Over Video Frames
-
-Question:
-
-> How does KARL's active token count vary across frames in the same video as epsilon changes?
-
-Status:
-
-```text
-packaged in this repository
-```
-
-Packaged artifacts:
-
-```text
-docs/experiment_4_temporal_token_usage.md
-results/temporal_token_usage_v1/
-```
-
-Main signal:
-
-```text
-eps=0.03: active-token std 4.29,  zero-range videos 43/60
-eps=0.05: active-token std 21.38, zero-range videos 11/60
-eps=0.07: active-token std 20.88, zero-range videos 6/60
-```
-
-Interpretation:
-
-KARL should not be summarized only by a single average token count. In videos, active-token usage can vary frame-to-frame, especially under stronger compression. That variation is not well explained by raw RGB frame difference on average.
