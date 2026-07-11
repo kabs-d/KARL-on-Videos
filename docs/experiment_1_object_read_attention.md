@@ -1,6 +1,6 @@
-# Direction 1: KARL Read Attention Maps
+# Direction 1: KARL Attention Maps
 
-This note visualizes where selected active KARL latent indices read from in short video frames.
+This note visualizes where selected active KARL latent indices attend in short video frames.
 
 ## Map Definition
 
@@ -68,7 +68,7 @@ Each column after the source frame is the attention map for one active latent in
 
 ## First-Frame Maps: `video_1614`
 
-This second clip gives another first-frame check that the read attention maps are not all diffuse: several selected latent indices place most of their mass on visually distinct cup/table regions.
+This second clip gives another first-frame check that the attention maps are not all diffuse: several selected latent indices place most of their mass on visually distinct cup/table regions.
 
 <table>
   <tr>

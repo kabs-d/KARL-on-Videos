@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Analyze between-token diversity/collapse in KARL read/write maps."""
+"""Analyze between-token diversity/collapse in KARL latent attention maps."""
 
 from __future__ import annotations
 
@@ -133,7 +133,7 @@ def pair_metrics(flat: np.ndarray, left: np.ndarray, right: np.ndarray, top_k: i
     }
 
 
-def plot_grouped_bars(path: Path, labels: list[str], read_values: list[float], write_values: list[float], title: str, ylabel: str) -> None:
+def plot_bars(path: Path, labels: list[str], values: list[float], title: str, ylabel: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     width, height = 820, 480
     margin_l, margin_t, margin_b, margin_r = 90, 55, 90, 35
@@ -142,32 +142,25 @@ def plot_grouped_bars(path: Path, labels: list[str], read_values: list[float], w
     image = Image.new("RGB", (width, height), (255, 255, 255))
     draw = ImageDraw.Draw(image)
     draw.text((margin_l, 18), title, fill=(0, 0, 0))
-    max_value = max(read_values + write_values + [1e-8])
+    max_value = max(values + [1e-8])
     max_value *= 1.15
     for i in range(6):
         y = margin_t + int(plot_h * i / 5)
         draw.line([margin_l, y, margin_l + plot_w, y], fill=(225, 225, 225))
     group_w = plot_w / max(1, len(labels))
-    bar_w = int(group_w * 0.26)
+    bar_w = int(group_w * 0.34)
     for i, label in enumerate(labels):
         cx = margin_l + int((i + 0.5) * group_w)
-        for offset, value, color, name in [
-            (-bar_w // 2, read_values[i], (76, 120, 168), "read"),
-            (bar_w // 2, write_values[i], (245, 133, 24), "write"),
-        ]:
-            bar_h = int(plot_h * value / max_value)
-            x0 = cx + offset - bar_w // 2
-            x1 = cx + offset + bar_w // 2
-            y0 = margin_t + plot_h - bar_h
-            y1 = margin_t + plot_h
-            draw.rectangle([x0, y0, x1, y1], fill=color)
-            draw.text((x0, max(margin_t, y0 - 18)), f"{value:.3f}", fill=(0, 0, 0))
+        value = values[i]
+        bar_h = int(plot_h * value / max_value)
+        x0 = cx - bar_w // 2
+        x1 = cx + bar_w // 2
+        y0 = margin_t + plot_h - bar_h
+        y1 = margin_t + plot_h
+        draw.rectangle([x0, y0, x1, y1], fill=(76, 120, 168))
+        draw.text((x0, max(margin_t, y0 - 18)), f"{value:.3f}", fill=(0, 0, 0))
         draw.text((cx - 28, margin_t + plot_h + 14), label, fill=(0, 0, 0))
     draw.text((margin_l, height - 32), ylabel, fill=(0, 0, 0))
-    draw.rectangle([width - 145, 22, width - 132, 35], fill=(76, 120, 168))
-    draw.text((width - 126, 21), "read", fill=(0, 0, 0))
-    draw.rectangle([width - 85, 22, width - 72, 35], fill=(245, 133, 24))
-    draw.text((width - 66, 21), "write", fill=(0, 0, 0))
     draw.line([margin_l, margin_t, margin_l, margin_t + plot_h], fill=(0, 0, 0))
     draw.line([margin_l, margin_t + plot_h, margin_l + plot_w, margin_t + plot_h], fill=(0, 0, 0))
     image.save(path)
@@ -237,13 +230,12 @@ def main() -> int:
     for row in frame_rows_in:
         map_path = resolve_path(Path(row["attention_map_path"]), workspace)
         z = np.load(map_path)
-        read_maps = np.asarray(z["encoder_latent_to_input_grid_attn_16x16"], dtype=np.float64)
-        write_maps = np.asarray(z["decoder_reconstruction_slot_to_latent_attn_16x16"], dtype=np.float64)
+        attention_maps = np.asarray(z["encoder_latent_to_input_grid_attn_16x16"], dtype=np.float64)
         active_indices = np.asarray(z["active_token_indices"], dtype=np.int64)
-        if read_maps.shape != write_maps.shape or read_maps.ndim != 3 or read_maps.shape[-2:] != (GRID, GRID):
-            raise RuntimeError(f"Unexpected read/write shapes in {map_path}: {read_maps.shape}, {write_maps.shape}")
+        if attention_maps.ndim != 3 or attention_maps.shape[-2:] != (GRID, GRID):
+            raise RuntimeError(f"Unexpected attention map shape in {map_path}: {attention_maps.shape}")
 
-        n = int(read_maps.shape[0])
+        n = int(attention_maps.shape[0])
         possible_pairs = n * (n - 1) // 2
         summary: dict[str, Any] = {
             "epsilon_tag": row["epsilon_tag"],
@@ -263,17 +255,13 @@ def main() -> int:
 
         left, right = sampled_pair_indices(n, args.max_pairs_per_frame, rng)
         summary["sampled_pairs"] = int(left.shape[0])
-        read_flat = normalize_rows(read_maps)
-        write_flat = normalize_rows(write_maps)
-        read_pair = pair_metrics(read_flat, left, right, args.top_k_cells)
-        write_pair = pair_metrics(write_flat, left, right, args.top_k_cells)
+        attention_flat = normalize_rows(attention_maps)
+        attention_pair = pair_metrics(attention_flat, left, right, args.top_k_cells)
         for metric in ["corr", "top_iou", "center_distance", "peak_distance"]:
-            summary.update(summarize_values(np.asarray(read_pair[metric], dtype=np.float64), f"read_pair_{metric}"))
-            summary.update(summarize_values(np.asarray(write_pair[metric], dtype=np.float64), f"write_pair_{metric}"))
+            summary.update(summarize_values(np.asarray(attention_pair[metric], dtype=np.float64), f"attention_pair_{metric}"))
         summary.update(
             {
-                "read_pair_distinctness_mean": float(1.0 - np.mean(read_pair["corr"])),
-                "write_pair_distinctness_mean": float(1.0 - np.mean(write_pair["corr"])),
+                "attention_pair_distinctness_mean": float(1.0 - np.mean(attention_pair["corr"])),
                 "active_token_index_min": int(active_indices.min()) if active_indices.size else "",
                 "active_token_index_max": int(active_indices.max()) if active_indices.size else "",
             }
@@ -283,15 +271,11 @@ def main() -> int:
     frame_fields = [
         "epsilon_tag", "epsilon", "video_id", "video_sample_uid", "frame_position", "frame_index",
         "active_token_count", "possible_pairs", "sampled_pairs",
-        "read_pair_corr_mean", "read_pair_corr_median", "read_pair_corr_q25", "read_pair_corr_q75",
-        "write_pair_corr_mean", "write_pair_corr_median", "write_pair_corr_q25", "write_pair_corr_q75",
-        "read_pair_top_iou_mean", "read_pair_top_iou_median", "read_pair_top_iou_q25", "read_pair_top_iou_q75",
-        "write_pair_top_iou_mean", "write_pair_top_iou_median", "write_pair_top_iou_q25", "write_pair_top_iou_q75",
-        "read_pair_center_distance_mean", "read_pair_center_distance_median", "read_pair_center_distance_q25", "read_pair_center_distance_q75",
-        "write_pair_center_distance_mean", "write_pair_center_distance_median", "write_pair_center_distance_q25", "write_pair_center_distance_q75",
-        "read_pair_peak_distance_mean", "read_pair_peak_distance_median", "read_pair_peak_distance_q25", "read_pair_peak_distance_q75",
-        "write_pair_peak_distance_mean", "write_pair_peak_distance_median", "write_pair_peak_distance_q25", "write_pair_peak_distance_q75",
-        "read_pair_distinctness_mean", "write_pair_distinctness_mean",
+        "attention_pair_corr_mean", "attention_pair_corr_median", "attention_pair_corr_q25", "attention_pair_corr_q75",
+        "attention_pair_top_iou_mean", "attention_pair_top_iou_median", "attention_pair_top_iou_q25", "attention_pair_top_iou_q75",
+        "attention_pair_center_distance_mean", "attention_pair_center_distance_median", "attention_pair_center_distance_q25", "attention_pair_center_distance_q75",
+        "attention_pair_peak_distance_mean", "attention_pair_peak_distance_median", "attention_pair_peak_distance_q25", "attention_pair_peak_distance_q75",
+        "attention_pair_distinctness_mean",
         "active_token_index_min", "active_token_index_max", "attention_map_path",
     ]
     write_csv(output_dir / "tables" / "latent_frame_diversity_summary.csv", frame_summaries, frame_fields)
@@ -304,14 +288,10 @@ def main() -> int:
     metric_keys = [
         "active_token_count",
         "sampled_pairs",
-        "read_pair_corr_mean",
-        "write_pair_corr_mean",
-        "read_pair_top_iou_mean",
-        "write_pair_top_iou_mean",
-        "read_pair_center_distance_mean",
-        "write_pair_center_distance_mean",
-        "read_pair_distinctness_mean",
-        "write_pair_distinctness_mean",
+        "attention_pair_corr_mean",
+        "attention_pair_top_iou_mean",
+        "attention_pair_center_distance_mean",
+        "attention_pair_distinctness_mean",
     ]
     for epsilon_tag, rows in sorted(by_epsilon.items()):
         item: dict[str, Any] = {"epsilon_tag": epsilon_tag, "frame_rows": len(rows)}
@@ -335,27 +315,24 @@ def main() -> int:
     write_json(output_dir / "reports" / "latent_diversity_summary.json", summary)
 
     labels = [row["epsilon_tag"] for row in epsilon_rows]
-    plot_grouped_bars(
+    plot_bars(
         output_dir / "figures" / "pairwise_similarity_by_epsilon.png",
         labels,
-        [float(row["read_pair_corr_mean_mean"]) for row in epsilon_rows],
-        [float(row["write_pair_corr_mean_mean"]) for row in epsilon_rows],
-        "Mean pairwise token correlation",
+        [float(row["attention_pair_corr_mean_mean"]) for row in epsilon_rows],
+        "Mean pairwise attention-map correlation",
         "higher = more similar / more collapsed",
     )
-    plot_grouped_bars(
+    plot_bars(
         output_dir / "figures" / "pairwise_overlap_by_epsilon.png",
         labels,
-        [float(row["read_pair_top_iou_mean_mean"]) for row in epsilon_rows],
-        [float(row["write_pair_top_iou_mean_mean"]) for row in epsilon_rows],
+        [float(row["attention_pair_top_iou_mean_mean"]) for row in epsilon_rows],
         "Mean pairwise top-cell IoU",
         "higher = more spatial overlap",
     )
-    plot_grouped_bars(
+    plot_bars(
         output_dir / "figures" / "pairwise_center_distance_by_epsilon.png",
         labels,
-        [float(row["read_pair_center_distance_mean_mean"]) for row in epsilon_rows],
-        [float(row["write_pair_center_distance_mean_mean"]) for row in epsilon_rows],
+        [float(row["attention_pair_center_distance_mean_mean"]) for row in epsilon_rows],
         "Mean pairwise center distance",
         "higher = more spatially spread out",
     )
@@ -363,8 +340,8 @@ def main() -> int:
         output_dir / "figures" / "diversity_vs_active_count.png",
         frame_summaries,
         "active_token_count",
-        "write_pair_corr_mean",
-        "Active token count vs write-map pairwise similarity",
+        "attention_pair_corr_mean",
+        "Active token count vs attention-map pairwise similarity",
     )
 
     lines = [
@@ -374,16 +351,16 @@ def main() -> int:
         f"- sampled pairs per frame cap: {args.max_pairs_per_frame}",
         f"- top-k cells for overlap: {args.top_k_cells}",
         "",
-        "| epsilon | active tokens | read corr | write corr | read IoU | write IoU | read dist | write dist | read distinct | write distinct |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| epsilon | active tokens | attention corr | attention IoU | attention dist | attention distinct |",
+        "|---|---:|---:|---:|---:|---:|",
     ]
     for row in epsilon_rows:
         lines.append(
             f"| {row['epsilon_tag']} | {row['active_token_count_mean']:.2f} | "
-            f"{row['read_pair_corr_mean_mean']:.4f} | {row['write_pair_corr_mean_mean']:.4f} | "
-            f"{row['read_pair_top_iou_mean_mean']:.4f} | {row['write_pair_top_iou_mean_mean']:.4f} | "
-            f"{row['read_pair_center_distance_mean_mean']:.3f} | {row['write_pair_center_distance_mean_mean']:.3f} | "
-            f"{row['read_pair_distinctness_mean_mean']:.4f} | {row['write_pair_distinctness_mean_mean']:.4f} |"
+            f"{row['attention_pair_corr_mean_mean']:.4f} | "
+            f"{row['attention_pair_top_iou_mean_mean']:.4f} | "
+            f"{row['attention_pair_center_distance_mean_mean']:.3f} | "
+            f"{row['attention_pair_distinctness_mean_mean']:.4f} |"
         )
     lines.extend(
         [

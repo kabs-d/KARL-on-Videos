@@ -12,7 +12,7 @@ The repository is organized as four linked analysis notes. I am packaging them o
 
 | direction | status | note |
 |---|---|---|
-| 1. Object-like and temporally persistent read attention | packaged | [analysis README](docs/experiment_1_object_read_attention.md) |
+| 1. Object-like and temporally persistent attention maps | packaged | [analysis README](docs/experiment_1_object_read_attention.md) |
 | 2. KARL reconstructions and downstream VLM behavior | packaged | [analysis README](docs/experiment_2_qwen_karl_tradeoff.md) |
 | 3. Higher compression keeps more distinct tokens | packaged | [analysis README](docs/experiment_3_latent_distinctiveness.md) |
 | 4. Epsilon vs token utilization over video frames | next | README coming next |
@@ -25,15 +25,15 @@ For selected active latent indices, Direction 1 visualizes the attention map fro
 attention_map(k) = mean_heads Attention(q_latent[k], K_input_grid)
 ```
 
-On cup-moving clips, several selected latent token indices produce compact attention maps over object-like regions such as cups, hands, and table surfaces. More interestingly, when the same latent token index is tracked across 8 uniformly sampled frames from the same video, its attention map often remains spatially concentrated instead of becoming diffuse. This suggests that some active KARL latent indices can behave like persistent spatial readers within a video, repeatedly attending to stable scene regions across time.
+On cup-moving clips, several selected latent token indices produce compact attention maps over object-like regions such as cups, hands, and table surfaces. More interestingly, when the same latent token index is tracked across 8 uniformly sampled frames from the same video, its attention map often remains spatially concentrated instead of becoming diffuse. This suggests that some active KARL latent indices repeatedly attend to stable scene regions across time.
 Preview:
 
-| source frame | latent 36 read map | latent 132 read map |
+| source frame | latent 36 attention map | latent 132 attention map |
 |---|---|---|
 | <img src="results/direction1_object_read_attention_v1/original_frames/video_76_frame_000.png" width="160"> | <img src="results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_76/latent_036.png" width="160"> | <img src="results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_76/latent_132.png" width="160"> |
 | original `video_76` frame | cup-like region | hand-like region |
 
-See the detailed note: [Direction 1: KARL Read Attention Maps](docs/experiment_1_object_read_attention.md).
+See the detailed note: [Direction 1: KARL Attention Maps](docs/experiment_1_object_read_attention.md).
 
 ## Direction 2 Snapshot
 
@@ -62,25 +62,25 @@ See the detailed note: [Direction 2: KARL Reconstructions and Downstream VLM Beh
 
 ## Direction 3 Snapshot
 
-Direction 3 looks inside the active KARL token set itself. For each frame, it compares pairs of active latent read maps:
+Direction 3 looks inside the active KARL token set itself. For each frame, it compares pairs of active latent attention maps:
 
 ```text
-read_map(k) = mean_heads Attention(q_latent[k], K_input_grid)
+attention_map(k) = mean_heads Attention(q_latent[k], K_input_grid)
 ```
 
-The question is whether stronger compression leaves behind a collapsed set of similar tokens or a smaller set of more distinct readers.
+The question is whether stronger compression leaves behind a collapsed set of similar tokens or a smaller set of more distinct attention patterns.
 
-| epsilon | mean active tokens | read correlation | top-cell IoU | read distinctness |
+| epsilon | mean active tokens | attention correlation | top-cell IoU | attention distinctness |
 |---|---:|---:|---:|---:|
 | 0.03 | 251.25 | 0.4604 | 0.2900 | 0.5396 |
 | 0.05 | 198.89 | 0.2052 | 0.1055 | 0.7948 |
 | 0.07 | 115.57 | 0.1358 | 0.0737 | 0.8642 |
 
-The pattern is sharp: as epsilon increases, KARL keeps fewer tokens, but those tokens have less-overlapping read maps. This suggests that compression removes redundant readers first and preserves a smaller, more spatially distinct active set.
+The pattern is sharp: as epsilon increases, KARL keeps fewer tokens, but those tokens have less-overlapping attention maps. This suggests that compression removes redundant attention patterns first and preserves a smaller, more spatially distinct active set.
 
 ![Pairwise token similarity by epsilon](results/latent_distinctiveness_v1/figures/pairwise_similarity_by_epsilon.png)
 
-See the detailed note: [Direction 3: Compression Keeps More Distinct Latent Readers](docs/experiment_3_latent_distinctiveness.md).
+See the detailed note: [Direction 3: Compression Keeps More Distinct Latent Attention Maps](docs/experiment_3_latent_distinctiveness.md).
 
 ## Dataset Construction
 

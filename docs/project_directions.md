@@ -2,7 +2,7 @@
 
 This project is structured as four complementary probes of KARL on short videos.
 
-## 1. Object-Like And Temporally Persistent Read Attention
+## 1. Object-Like And Temporally Persistent Attention Maps
 
 Question:
 
@@ -23,7 +23,7 @@ results/direction1_object_read_attention_v1/
 
 Interpretation target:
 
-These examples do not prove object semantics in a causal sense. They provide visual evidence that selected active latent indices can produce compact, object-like read maps and can remain spatially concentrated across sampled video frames.
+These examples do not prove object semantics in a causal sense. They provide visual evidence that selected active latent indices can produce compact, object-like attention maps and can remain spatially concentrated across sampled video frames.
 
 ## 2. KARL Reconstructions And Downstream VLM Behavior
 
@@ -64,9 +64,9 @@ Question:
 Local analysis signal:
 
 ```text
-eps=0.03: ~251 active tokens, read distinctness 0.54
-eps=0.05: ~199 active tokens, read distinctness 0.79
-eps=0.07: ~116 active tokens, read distinctness 0.86
+eps=0.03: ~251 active tokens, attention distinctness 0.54
+eps=0.05: ~199 active tokens, attention distinctness 0.79
+eps=0.07: ~116 active tokens, attention distinctness 0.86
 ```
 
 Status:
@@ -84,7 +84,7 @@ results/latent_distinctiveness_v1/
 
 Interpretation:
 
-Higher compression keeps fewer active latent tokens, but those surviving tokens have less-overlapping read-attention maps. This suggests KARL concentrates its limited token budget over more distinct visual regions.
+Higher compression keeps fewer active latent tokens, but those surviving tokens have less-overlapping attention maps. This suggests KARL concentrates its limited token budget over more distinct visual regions.
 
 ## 4. Epsilon vs Token Utilization Over Video Frames
 
