@@ -10,7 +10,7 @@ KARL reads a frame through an encoder attention block that mixes latent-token qu
 read_map(k) = mean_heads Attention(q_latent[k], K_input_grid) in R^{16x16}
 ```
 
-This is a read-side map: it shows which input grid locations a latent token attends to while forming its representation.
+This map shows which input grid locations a latent token attends to while forming its representation.
 
 Settings used here:
 
