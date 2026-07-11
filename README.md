@@ -19,15 +19,22 @@ The repository is organized as four linked analysis notes. I am packaging them o
 
 ## Direction 1 Snapshot
 
-The first packaged direction visualizes KARL read-attention maps for selected active latent indices at `eps=0.07`:
+The first packaged direction looks inside KARL's adaptive tokenizer before any downstream QA model is used. For selected active latent indices, it visualizes encoder read attention from the latent query to the original `16x16` image/VQGAN grid:
 
 ```text
-encoder latent token query -> original 16x16 input grid key
+read_map(k) = mean_heads Attention(q_latent[k], K_input_grid)
 ```
 
-The note focuses on manually inspected cup-moving clips. It shows that several selected latent indices have compact, object-like read maps on the first frame, and that some indices remain spatially concentrated across the eight sampled frames of `video_76`. This is a qualitative tokenizer-interpretability probe, not an object-tracking claim and not a segmentation benchmark.
+On cup-moving clips, several selected latent indices produce compact maps on object-like regions such as cups or hands. The temporal table then keeps the latent index fixed across 8 uniformly sampled frames to check whether the read map remains spatially concentrated.
 
-See the detailed note: [Direction 1: Object-Like And Temporally Persistent Read Attention](docs/experiment_1_object_read_attention.md).
+Preview:
+
+| source frame | latent 36 read map | latent 132 read map |
+|---|---|---|
+| <img src="results/direction1_object_read_attention_v1/original_frames/video_76_frame_000.png" width="160"> | <img src="results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_76/latent_036.png" width="160"> | <img src="results/direction1_object_read_attention_v1/attention_heatmaps/first_frame/video_76/latent_132.png" width="160"> |
+| original `video_76` frame | cup-like region | hand-like region |
+
+See the detailed note: [Direction 1: KARL Read Attention Maps](docs/experiment_1_object_read_attention.md).
 
 ## Direction 2 Snapshot
 
@@ -75,7 +82,7 @@ This repository includes compact scripts, aggregate reports, tables, and figures
 Included packaged artifacts:
 
 - [Direction 1 detailed README](docs/experiment_1_object_read_attention.md)
-- [Selected Direction 1 read-attention manifest](results/direction1_object_read_attention_v1/tables/selected_read_attention_assets.csv)
+- [Selected Direction 1 attention heatmaps](results/direction1_object_read_attention_v1/attention_heatmaps)
 - [Direction 2 detailed README](docs/experiment_2_qwen_karl_tradeoff.md)
 - [Major-tag accuracy table](results/combined_qwen_karl_v1/tables/combined_major_tag_accuracy.csv)
 

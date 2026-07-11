@@ -31,6 +31,8 @@ Settings used here:
 
 ## First-Frame Maps: `video_76`
 
+Each column after the source frame is one active latent index from the same frame. A compact bright region means that latent reads most strongly from that part of the `16×16` input grid.
+
 <table>
   <tr>
     <th>original</th>
@@ -65,6 +67,8 @@ Settings used here:
 </table>
 
 ## First-Frame Maps: `video_1614`
+
+This second clip gives another first-frame check that the read maps are not all diffuse: several selected latent indices place most of their mass on visually distinct cup/table regions.
 
 <table>
   <tr>
@@ -107,7 +111,7 @@ Settings used here:
 
 ## Temporal Concentration In `video_76`
 
-Columns are sampled frames. The first row shows the original frame; lower rows show the same latent index across time. This is a spatial-concentration view, not a causal object-tracking claim.
+Columns are time: `f0` to `f7` are the 8 uniformly sampled frames. The first row shows the original frame at each timestep. Each lower row tracks one fixed latent index across those same frames, so vertical comparison shows where that latent reads in a given frame and horizontal comparison shows whether its read map stays compact, shifts, or diffuses over time.
 
 <table>
   <tr>
