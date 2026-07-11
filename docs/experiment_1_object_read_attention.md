@@ -4,7 +4,7 @@ This note visualizes where selected active KARL latent indices read from in shor
 
 ## Map Definition
 
-KARL reads a frame through an encoder attention block that mixes latent-token queries with the original `16×16` image/VQGAN grid. For an active latent index `k`, I extract the encoder attention from latent query `k` to the image-grid keys:
+KARL reads a frame through an encoder attention block that mixes latent-token queries with the original `16×16` image/VQGAN grid. For an active latent index `k`, I extract the attention map from latent query `k` to the image-grid keys:
 
 ```text
 read_map(k) = mean_heads Attention(q_latent[k], K_input_grid) in R^{16x16}
@@ -111,7 +111,7 @@ This second clip gives another first-frame check that the read attention maps ar
 
 ## Temporal Concentration In `video_76`
 
-Columns represent time: f0 to f7 are the 8 uniformly sampled frames from the same video. The first row shows the original frame at each timestep. Each lower row follows one fixed KARL latent index across those frames. The key observation is that several latent indices do not diffuse randomly over time: they remain spatially concentrated in similar regions of the scene across frames. This suggests that, at least in these examples, individual active latent indices can exhibit persistent spatial fixation within a video.
+Columns represent time: f0 to f7 are the 8 uniformly sampled frames from the same video. The first row shows the original frame at each timestep. Each lower row follows one fixed KARL latent token index across those frames. The key observation is that several latent indices do not diffuse randomly over time: they remain spatially concentrated in similar regions of the scene across frames. This suggests that, at least in these examples, individual active latent indices can exhibit persistent spatial fixation within a video.
 
 <table>
   <tr>
