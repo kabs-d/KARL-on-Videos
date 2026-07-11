@@ -7,16 +7,17 @@ This note visualizes where selected active KARL latent indices read from in shor
 KARL reads a frame through an encoder attention block that mixes latent-token queries with the original `16×16` image/VQGAN grid. For an active latent index `k`, I extract the encoder attention from latent query `k` to the image-grid keys:
 
 ```text
-read_map(k) = mean_heads Attention(q_latent[k], K_input_grid) ∈ R^{16×16}
+read_map(k) = mean_heads Attention(q_latent[k], K_input_grid) in R^{16x16}
 ```
 
-This is a read-side map: it shows which input grid locations a latent token attends to while forming its representation. It is not a decoder map, segmentation mask, or causal attribution map.
+This is a read-side map: it shows which input grid locations a latent token attends to while forming its representation.
 
 Settings used here:
 
 - Encoder layer: `7`
 - Compression threshold: `eps=0.07`
 - Active latent condition: `halt_probability <= 0.75`
+- Video sampling: `8` uniformly sampled frames from `video_76`
 - Visualization: `16×16` map upsampled to `256×256`
 - Color scale: contrast-normalized independently per latent/frame
 
@@ -24,11 +25,9 @@ Settings used here:
 
 ## Video Preview
 
-`video_76` sampled frames:
+`video_76`, 8 uniformly sampled frames:
 
-<video controls width="640">
-  <source src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames.mp4" type="video/mp4">
-</video>
+![video_76 sampled frames](../results/direction1_object_read_attention_v1/media/video_76_sampled_frames.gif)
 
 ## First-Frame Maps: `video_76`
 
