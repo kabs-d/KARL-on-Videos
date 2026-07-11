@@ -4,13 +4,21 @@ This note visualizes where selected active KARL latent indices read from in shor
 
 ## Map Definition
 
-For a frame, the map is:
+KARL reads a frame through an encoder attention block that mixes latent-token queries with the original `16×16` image/VQGAN grid. For an active latent index `k`, I extract the encoder attention from latent query `k` to the image-grid keys:
 
 ```text
 read_map(k) = mean_heads Attention(q_latent[k], K_input_grid) ∈ R^{16×16}
 ```
 
-Captured from KARL encoder layer `7` at `eps=0.07`. Only active latent indices are shown; active means `halt_probability <= 0.75`. Each `16×16` map is upsampled to `256×256` and contrast-normalized independently for visualization.
+This is a read-side map: it shows which input grid locations a latent token attends to while forming its representation. It is not a decoder map, segmentation mask, or causal attribution map.
+
+Settings used here:
+
+- Encoder layer: `7`
+- Compression threshold: `eps=0.07`
+- Active latent condition: `halt_probability <= 0.75`
+- Visualization: `16×16` map upsampled to `256×256`
+- Color scale: contrast-normalized independently per latent/frame
 
 `latent index` is the identity tracked across frames. Text labels are manual visual notes, not ground truth.
 
@@ -18,9 +26,9 @@ Captured from KARL encoder layer `7` at `eps=0.07`. Only active latent indices a
 
 `video_76` sampled frames:
 
-<video src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames.mp4" controls width="480"></video>
-
-[Open the sampled-frame MP4](../results/direction1_object_read_attention_v1/media/video_76_sampled_frames.mp4)
+<video controls width="640">
+  <source src="../results/direction1_object_read_attention_v1/media/video_76_sampled_frames.mp4" type="video/mp4">
+</video>
 
 ## First-Frame Maps: `video_76`
 
@@ -199,6 +207,3 @@ Columns are sampled frames. The first row shows the original frame; lower rows s
 ## Artifacts
 
 - Selected attention heatmaps: [results/direction1_object_read_attention_v1/attention_heatmaps](../results/direction1_object_read_attention_v1/attention_heatmaps)
-- Sampled-frame MP4: [results/direction1_object_read_attention_v1/media/video_76_sampled_frames.mp4](../results/direction1_object_read_attention_v1/media/video_76_sampled_frames.mp4)
-- Asset manifest: [results/direction1_object_read_attention_v1/tables/selected_read_attention_assets.csv](../results/direction1_object_read_attention_v1/tables/selected_read_attention_assets.csv)
-- Rendering script: [scripts/render_direction1_read_attention_assets.py](../scripts/render_direction1_read_attention_assets.py)
