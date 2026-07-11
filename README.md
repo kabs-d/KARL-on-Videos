@@ -78,7 +78,11 @@ The question is whether stronger compression leaves behind a collapsed set of si
 
 The pattern is sharp: as epsilon increases, KARL keeps fewer tokens, but those tokens have less-overlapping attention maps. This suggests that compression removes redundant attention patterns first and preserves a smaller, more spatially distinct active set.
 
-![Pairwise token similarity by epsilon](results/latent_distinctiveness_v1/figures/pairwise_similarity_by_epsilon.png)
+Example visual row: `video_76`, frame `f0`, latent `36`.
+
+| source frame | eps=0.03 | eps=0.05 | eps=0.07 |
+|---|---|---|---|
+| <img src="results/direction1_object_read_attention_v1/media/video_76_sampled_frames/frame_000.png" width="140"> | <img src="results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_003/frame_000.png" width="140"> | <img src="results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_005/frame_000.png" width="140"> | <img src="results/latent_distinctiveness_v1/attention_examples/video_76/latent_036/eps_007/frame_000.png" width="140"> |
 
 See the detailed note: [Direction 3: Compression Keeps More Distinct Latent Attention Maps](docs/experiment_3_latent_distinctiveness.md).
 
@@ -124,10 +128,11 @@ Included packaged artifacts:
 - [Major-tag accuracy table](results/combined_qwen_karl_v1/tables/combined_major_tag_accuracy.csv)
 - [Direction 3 detailed README](docs/experiment_3_latent_distinctiveness.md)
 - [Direction 3 latent diversity summary](results/latent_distinctiveness_v1/tables/latent_epsilon_diversity_summary.csv)
+- [Direction 3 visual attention examples](results/latent_distinctiveness_v1/attention_examples)
 - [Direction 4 detailed README](docs/experiment_4_temporal_token_usage.md)
 - [Direction 4 temporal token usage summary](results/temporal_token_usage_v1/tables/temporal_token_usage_summary.csv)
 
-The Direction 2 and Direction 3 READMEs embed their main figures directly, so those figures are not listed separately as reader-facing artifacts here.
+The Direction 2 README embeds its main figures directly. Direction 3 uses compact visual attention examples instead of separate chart artifacts.
 
 Excluded:
 
@@ -151,6 +156,7 @@ run_karl_reconstruction_mdl.py
 run_qwen_on_karl_reconstructions.py
 analyze_combined_qwen_karl_tradeoff.py
 analyze_karl_latent_diversity.py
+render_direction3_attention_examples.py
 analyze_karl_temporal_token_usage.py
 ```
 
