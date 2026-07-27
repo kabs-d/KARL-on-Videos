@@ -12,9 +12,9 @@ The repository is organized as three linked analysis notes. Each note can be rea
 
 | direction | status | note |
 |---|---|---|
-| 1. Object-like and temporally persistent attention maps | packaged | [analysis README](docs/experiment_1_object_read_attention.md) |
-| 2. KARL reconstructions and downstream VLM behavior | packaged | [analysis README](docs/experiment_2_qwen_karl_tradeoff.md) |
-| 3. Higher compression keeps more distinct tokens | packaged | [analysis README](docs/experiment_3_latent_distinctiveness.md) |
+| 1. Object-like and temporally persistent attention maps | [analysis README](docs/experiment_1_object_read_attention.md) |
+| 2. KARL reconstructions and downstream VLM behavior | [analysis README](docs/experiment_2_qwen_karl_tradeoff.md) |
+| 3. Higher compression keeps more distinct tokens | [analysis README](docs/experiment_3_latent_distinctiveness.md) |
 
 ## Direction 1 Snapshot
 
