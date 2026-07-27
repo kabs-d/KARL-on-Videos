@@ -10,7 +10,7 @@ The project uses short videos from the **Perception Test (Google Deepmind)** tra
 
 The repository is organized as three linked analysis notes. Each note can be read independently.
 
-| direction | status | note |
+| direction | note |
 |---|---|---|
 | 1. Object-like and temporally persistent attention maps | [analysis README](docs/experiment_1_object_read_attention.md) |
 | 2. KARL reconstructions and downstream VLM behavior | [analysis README](docs/experiment_2_qwen_karl_tradeoff.md) |
